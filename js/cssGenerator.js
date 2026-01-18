@@ -124,8 +124,9 @@ body,
     position: absolute !important;
     top: var(--belt-top) !important;
     left: var(--belt-left) !important;
+    transform: translate(-50%, -50%) scale(${scaleValue}) rotate(${rotation}deg) !important;
+    transform-origin: center center !important;
     overflow: hidden !important;
-    transform: scale(${scaleValue}) rotate(${rotation}deg);
     text-shadow: ${textShadow};
 }
 

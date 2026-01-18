@@ -13,7 +13,7 @@ const PreviewManager = (() => {
   let currentState = {
     backgroundImage: null,
     textColor: '#EE9696',
-    positionX: 0,
+    positionX: 50,
     positionY: 50,
     scale: 300,
     rotation: -20,

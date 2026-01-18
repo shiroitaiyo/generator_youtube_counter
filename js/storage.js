@@ -9,7 +9,7 @@ const StorageManager = (() => {
   // デフォルト設定値
   const DEFAULT_SETTINGS = {
     textColor: '#EE9696',
-    positionX: 0,
+    positionX: 50,
     positionY: 50,
     scale: 300,
     rotation: -20,
