@@ -1,293 +1,347 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>使い方ガイド - YouTube登録者数カウンターCSS生成ツール</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .guide {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    .guide h1 {
-      font-size: 1.75rem;
-      color: var(--color-primary);
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 2px solid var(--color-primary);
-    }
-    .guide h2 {
-      font-size: 1.25rem;
-      color: var(--color-text);
-      margin: 2rem 0 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--color-border);
-    }
-    .guide h3 {
-      font-size: 1rem;
-      color: var(--color-primary);
-      margin: 1.5rem 0 0.75rem;
-    }
-    .guide p {
-      margin-bottom: 1rem;
-      line-height: 1.8;
-    }
-    .guide ol, .guide ul {
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
-    }
-    .guide li {
-      margin-bottom: 0.5rem;
-      line-height: 1.7;
-    }
-    .guide code {
-      background: #f5f5f5;
-      padding: 0.125rem 0.375rem;
-      border-radius: 3px;
-      font-family: 'Consolas', monospace;
-      font-size: 0.875rem;
-    }
-    .guide pre {
-      background: #1e1e1e;
-      color: #d4d4d4;
-      padding: 1rem;
-      border-radius: var(--radius-sm);
-      overflow-x: auto;
-      font-size: 0.8125rem;
-      margin-bottom: 1rem;
-    }
-    .guide .note {
-      background: #e3f2fd;
-      border-left: 4px solid var(--color-primary);
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    }
-    .guide .warning {
-      background: #fff8e1;
-      border-left: 4px solid #ff9800;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    }
-    .guide .step {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      align-items: flex-start;
-    }
-    .guide .step-number {
-      background: var(--color-primary);
-      color: white;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      flex-shrink: 0;
-    }
-    .guide .step-content {
-      flex: 1;
-    }
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-  </style>
-</head>
-<body>
-  <header class="header">
-    <h1 class="header__title">使い方ガイド</h1>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>使い方ガイド - YouTube登録者数カウンターCSS生成ツール</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .guide {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      .guide h1 {
+        font-size: 1.75rem;
+        color: var(--color-primary);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--color-primary);
+      }
+      .guide h2 {
+        font-size: 1.25rem;
+        color: var(--color-text);
+        margin: 2rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .guide h3 {
+        font-size: 1rem;
+        color: var(--color-primary);
+        margin: 1.5rem 0 0.75rem;
+      }
+      .guide p {
+        margin-bottom: 1rem;
+        line-height: 1.8;
+      }
+      .guide ol,
+      .guide ul {
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+      }
+      .guide li {
+        margin-bottom: 0.5rem;
+        line-height: 1.7;
+      }
+      .guide code {
+        background: #f5f5f5;
+        padding: 0.125rem 0.375rem;
+        border-radius: 3px;
+        font-family: 'Consolas', monospace;
+        font-size: 0.875rem;
+      }
+      .guide pre {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        padding: 1rem;
+        border-radius: var(--radius-sm);
+        overflow-x: auto;
+        font-size: 0.8125rem;
+        margin-bottom: 1rem;
+      }
+      .guide .note {
+        background: #e3f2fd;
+        border-left: 4px solid var(--color-primary);
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+      .guide .warning {
+        background: #fff8e1;
+        border-left: 4px solid #ff9800;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+      .guide .step {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        align-items: flex-start;
+      }
+      .guide .step-number {
+        background: var(--color-primary);
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+      .guide .step-content {
+        flex: 1;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">使い方ガイド</h1>
+    </header>
 
-  <main class="guide">
-    <a href="../index.html" class="back-link">← ツールに戻る</a>
+    <main class="guide">
+      <a href="../index.html" class="back-link">← ツールに戻る</a>
 
-    <h1>YouTube登録者数カウンターCSS生成ツール 使い方ガイド</h1>
+      <h1>YouTube登録者数カウンターCSS生成ツール 使い方ガイド</h1>
 
-    <h2>1. はじめに</h2>
-    <p>このツールは、YouTube Studio（YouTube Analytics）の登録者数カウンターをカスタマイズするためのCSSを簡単に生成できるWebアプリケーションです。</p>
+      <h2>1. はじめに</h2>
+      <p>
+        このツールは、YouTube Studio（YouTube
+        Analytics）の登録者数カウンターをカスタマイズするためのCSSを簡単に生成できるWebアプリケーションです。
+      </p>
 
-    <div class="note">
-      <strong>💡 プライバシーについて</strong><br>
-      このツールはすべての処理をお使いのブラウザ内で行います。選択した画像やデータがサーバーに送信されることは一切ありません。
-    </div>
-
-    <h2>2. 基本的な使い方</h2>
-
-    <h3>ステップ1: 背景画像の準備</h3>
-    <div class="step">
-      <div class="step-number">1</div>
-      <div class="step-content">
-        <p>カウンターに使用する背景画像を準備します。</p>
-        <ul>
-          <li>対応形式: PNG, JPEG, GIF, WebP</li>
-          <li>サイズ: 自由（アップロード時に自動検出されます）</li>
-          <li>推奨容量: 500KB以下（CSSのサイズを抑えるため）</li>
-        </ul>
+      <div class="note">
+        <strong>💡 プライバシーについて</strong><br />
+        このツールはすべての処理をお使いのブラウザ内で行います。選択した画像やデータがサーバーに送信されることは一切ありません。
       </div>
-    </div>
 
-    <h3>ステップ2: 画像のアップロード</h3>
-    <div class="step">
-      <div class="step-number">2</div>
-      <div class="step-content">
-        <p>「ファイルを選択」ボタンをクリックして、準備した背景画像を選択します。画像を持っていない場合は、テンプレートから選択することもできます。</p>
+      <h2>2. 基本的な使い方</h2>
+
+      <h3>ステップ1: 背景画像の準備</h3>
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <p>カウンターに使用する背景画像を準備します。</p>
+          <ul>
+            <li>対応形式: PNG, JPEG, GIF, WebP</li>
+            <li>サイズ: 自由（アップロード時に自動検出されます）</li>
+            <li>推奨容量: 500KB以下（CSSのサイズを抑えるため）</li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <h3>ステップ3: 数字の位置調整</h3>
-    <div class="step">
-      <div class="step-number">3</div>
-      <div class="step-content">
-        <p>プレビューを見ながら、スライダーまたは数値入力で数字の位置を調整します。</p>
-        <ul>
-          <li><strong>X座標</strong>: 左右の位置（-100% ～ 100%）</li>
-          <li><strong>Y座標</strong>: 上下の位置（-100% ～ 100%）</li>
-        </ul>
+      <h3>ステップ2: 画像のアップロード</h3>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <p>
+            「ファイルを選択」ボタンをクリックして、準備した背景画像を選択します。画像を持っていない場合は、テンプレートから選択することもできます。
+          </p>
+        </div>
       </div>
-    </div>
 
-    <h3>ステップ4: スタイルの調整</h3>
-    <div class="step">
-      <div class="step-number">4</div>
-      <div class="step-content">
-        <p>必要に応じて以下の設定を調整します：</p>
-        <ul>
-          <li><strong>数字のサイズ</strong>: 拡大率を調整</li>
-          <li><strong>数字の色</strong>: カラーピッカーで選択</li>
-          <li><strong>数字の回転</strong>: 傾きを調整</li>
-        </ul>
+      <h3>ステップ3: 数字の位置調整</h3>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <p>
+            プレビューを見ながら、スライダーまたは数値入力で数字の位置を調整します。
+          </p>
+          <ul>
+            <li><strong>X座標</strong>: 左右の位置（-100% ～ 100%）</li>
+            <li><strong>Y座標</strong>: 上下の位置（-100% ～ 100%）</li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <h3>ステップ5: CSSのコピー</h3>
-    <div class="step">
-      <div class="step-number">5</div>
-      <div class="step-content">
-        <p>設定が完了したら：</p>
-        <ol>
-          <li>「CSS再生成」ボタンをクリックして最新のCSSを生成</li>
-          <li>「コピー」ボタンでCSSをクリップボードにコピー</li>
-        </ol>
+      <h3>ステップ4: スタイルの調整</h3>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <p>必要に応じて以下の設定を調整します：</p>
+          <ul>
+            <li><strong>数字のサイズ</strong>: 拡大率を調整</li>
+            <li><strong>数字の色</strong>: カラーピッカーで選択</li>
+            <li><strong>数字の回転</strong>: 傾きを調整</li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <h2>3. 詳細設定</h2>
-    <p>「詳細設定」をクリックすると、追加の設定項目が表示されます。</p>
+      <h3>ステップ5: CSSのコピー</h3>
+      <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <p>設定が完了したら：</p>
+          <ol>
+            <li>「CSS再生成」ボタンをクリックして最新のCSSを生成</li>
+            <li>「コピー」ボタンでCSSをクリップボードにコピー</li>
+          </ol>
+        </div>
+      </div>
 
-    <h3>テキスト装飾</h3>
-    <ul>
-      <li><strong>影を付ける</strong>: 文字に影をつけて視認性を向上</li>
-      <li><strong>影のぼかし</strong>: 影のぼかし具合を調整（0px ～ 10px）</li>
-      <li><strong>影の色</strong>: 影の色を選択</li>
-    </ul>
+      <h2>3. 詳細設定</h2>
+      <p>「詳細設定」をクリックすると、追加の設定項目が表示されます。</p>
 
-    <h3>フォント設定</h3>
-    <p>2種類のフォント選択方法があります：</p>
+      <h3>テキスト装飾</h3>
+      <ul>
+        <li><strong>影を付ける</strong>: 文字に影をつけて視認性を向上</li>
+        <li>
+          <strong>影のぼかし</strong>: 影のぼかし具合を調整（0px ～ 10px）
+        </li>
+        <li><strong>影の色</strong>: 影の色を選択</li>
+      </ul>
 
-    <h4>Google Fonts（推奨）</h4>
-    <p>あらかじめ用意されたフォントから選択できます。すべて商用利用可能です。</p>
-    <ul>
-      <li><strong>Moirai One</strong>: デザイン性重視</li>
-      <li><strong>Roboto</strong>: シンプルで読みやすい</li>
-      <li><strong>Orbitron</strong>: デジタル風</li>
-      <li><strong>Press Start 2P</strong>: レトロゲーム風</li>
-      <li><strong>Bebas Neue</strong>: スタイリッシュ</li>
-    </ul>
+      <h3>フォント設定</h3>
+      <p>2種類のフォント選択方法があります：</p>
 
-    <h4>ローカルフォント</h4>
-    <p>PCにインストールされているフォントを使用できます。</p>
-    <div class="warning">
-      <strong>⚠️ ライセンスにご注意ください</strong><br>
-      ローカルフォントを使用する場合、フォントのライセンス（商用利用可否、再配布可否など）をご自身で確認してください。不明な場合はGoogle Fontsの使用を推奨します。
-    </div>
+      <h4>Google Fonts（推奨）</h4>
+      <p>
+        あらかじめ用意されたフォントから選択できます。すべて商用利用可能です。
+      </p>
+      <ul>
+        <li><strong>Moirai One</strong>: デザイン性重視</li>
+        <li><strong>Roboto</strong>: シンプルで読みやすい</li>
+        <li><strong>Orbitron</strong>: デジタル風</li>
+        <li><strong>Press Start 2P</strong>: レトロゲーム風</li>
+        <li><strong>Bebas Neue</strong>: スタイリッシュ</li>
+      </ul>
 
-    <h3>表示オプション</h3>
-    <ul>
-      <li><strong>カンマを表示</strong>: 3桁区切りのカンマを表示/非表示</li>
-    </ul>
+      <h4>ローカルフォント</h4>
+      <p>PCにインストールされているフォントを使用できます。</p>
+      <div class="warning">
+        <strong>⚠️ ライセンスにご注意ください</strong><br />
+        ローカルフォントを使用する場合、フォントのライセンス（商用利用可否、再配布可否など）をご自身で確認してください。不明な場合はGoogle
+        Fontsの使用を推奨します。
+      </div>
 
-    <h3>背景サイズ（自動検出）</h3>
-    <p>画像をアップロードすると、自動的に画像のサイズ（幅と高さ）が検出され、CSSに反映されます。手動での設定は不要です。</p>
+      <h3>表示オプション</h3>
+      <ul>
+        <li><strong>カンマを表示</strong>: 3桁区切りのカンマを表示/非表示</li>
+      </ul>
 
-    <h3>数字の調整（上級者向け）</h3>
-    <ul>
-      <li><strong>桁幅</strong>: 各数字の幅（デフォルト: 46px）</li>
-      <li><strong>上部クリップ</strong>: 数字の上部を切り取る量（デフォルト: 20px）</li>
-    </ul>
+      <h3>背景サイズ（自動検出）</h3>
+      <p>
+        画像をアップロードすると、自動的に画像のサイズ（幅と高さ）が検出され、CSSに反映されます。手動での設定は不要です。
+      </p>
 
-    <h2>4. OBS Studioでの使用方法</h2>
+      <h3>数字の調整（上級者向け）</h3>
+      <ul>
+        <li><strong>桁幅</strong>: 各数字の幅（デフォルト: 46px）</li>
+        <li>
+          <strong>上部クリップ</strong>: 数字の上部を切り取る量（デフォルト:
+          20px）
+        </li>
+      </ul>
 
-    <ol>
-      <li>OBS Studioを起動します</li>
-      <li>ソースの追加で「ブラウザ」を選択します</li>
-      <li>以下の設定を行います：
-        <ul>
-          <li>URL: <code>https://studio.youtube.com/channel/[チャンネルID]/analytics/tab-subscribers/period-realtime</code></li>
-          <li>幅・高さ: ツールで表示された背景サイズの値を入力</li>
-        </ul>
-      </li>
-      <li>「カスタムCSS」欄に生成したCSSをペーストします</li>
-      <li>「OK」をクリックして設定を完了します</li>
-    </ol>
+      <h2>4. OBS Studioでの使用方法</h2>
 
-    <div class="note">
-      <strong>💡 ヒント</strong><br>
-      初回はYouTubeへのログインが必要です。OBSのブラウザソースを右クリックし、「対話」を選択してログインしてください。
-    </div>
+      <h3>URLの取得</h3>
+      <ol>
+        <li>お使いのブラウザでYouTubeを開きます</li>
+        <li>右上のアイコンをクリックし、「YouTube Studio」を選択します</li>
+        <li>左側のメニューから「アナリティクス」をクリックします</li>
+        <li>
+          右側に表示されるチャンネル登録者数の下にある「現在の数を表示」をクリックします
+        </li>
+        <li>
+          開いたページ（現在の登録者数が表示されているページ）のURLをコピーします
+        </li>
+      </ol>
 
-    <h2>5. トラブルシューティング</h2>
+      <h3>OBSへの設定</h3>
+      <ol>
+        <li>OBS Studioを起動します</li>
+        <li>ソースの追加で「ブラウザ」を選択し、「OK」をクリックします</li>
+        <li>
+          開いたウィンドウで以下の設定を行います：
+          <ul>
+            <li>URL: 先ほどコピーしたURLをペーストします</li>
+            <li>幅・高さ: ツールで表示された背景サイズの値を入力</li>
+          </ul>
+        </li>
+        <li>「カスタムCSS」欄に生成したCSSをペーストします</li>
+        <li>「OK」をクリックして設定を完了します</li>
+      </ol>
 
-    <h3>数字が表示されない</h3>
-    <ul>
-      <li>YouTubeにログインしているか確認してください</li>
-      <li>チャンネルIDが正しいか確認してください</li>
-      <li>数字の位置が画面外になっていないか確認してください</li>
-    </ul>
+      <div class="note">
+        <strong>💡 ヒント</strong><br />
+        画面を閉じてしまった場合は、追加したブラウザソースを右クリックし、「プロパティ」を選択すると同じウィンドウが開きます。
+      </div>
 
-    <h3>フォントが表示されない</h3>
-    <ul>
-      <li>Google Fontsの場合、インターネット接続を確認してください</li>
-      <li>ローカルフォントの場合、フォント名が正しいか確認してください</li>
-    </ul>
+      <div class="note">
+        <strong>💡 初回ログインについて</strong><br />
+        初回はYouTubeへのログインが必要です。OBSのブラウザソースを右クリックし、「対話」を選択してログインしてください。
+      </div>
 
-    <h3>画像がアップロードできない</h3>
-    <ul>
-      <li>対応形式（PNG, JPEG, GIF, WebP）か確認してください</li>
-      <li>ファイルサイズが5MB以下か確認してください</li>
-    </ul>
+      <h2>5. トラブルシューティング</h2>
 
-    <h3>CSSがコピーできない</h3>
-    <ul>
-      <li>ブラウザの権限設定でクリップボードへのアクセスを許可してください</li>
-      <li>テキストエリアを手動で選択（Ctrl+A）してコピー（Ctrl+C）してください</li>
-    </ul>
+      <h3>数字が表示されない</h3>
+      <ul>
+        <li>YouTubeにログインしているか確認してください</li>
+        <li>チャンネルIDが正しいか確認してください</li>
+        <li>数字の位置が画面外になっていないか確認してください</li>
+      </ul>
 
-    <h2>6. よくある質問</h2>
+      <h3>フォントが表示されない</h3>
+      <ul>
+        <li>Google Fontsの場合、インターネット接続を確認してください</li>
+        <li>ローカルフォントの場合、フォント名が正しいか確認してください</li>
+      </ul>
 
-    <h3>Q: 設定は保存されますか？</h3>
-    <p>A: はい、設定はブラウザのlocalStorageに自動保存されます。ただし、アップロードした画像は保存されませんので、ページを再読み込みした際は再度選択する必要があります。</p>
+      <h3>画像がアップロードできない</h3>
+      <ul>
+        <li>対応形式（PNG, JPEG, GIF, WebP）か確認してください</li>
+        <li>ファイルサイズが5MB以下か確認してください</li>
+      </ul>
 
-    <h3>Q: 商用利用はできますか？</h3>
-    <p>A: このツール自体はMITライセンスで公開されており、商用利用可能です。Google Fontsも商用利用可能です。ローカルフォントを使用する場合は、各フォントのライセンスをご確認ください。</p>
+      <h3>CSSがコピーできない</h3>
+      <ul>
+        <li>
+          ブラウザの権限設定でクリップボードへのアクセスを許可してください
+        </li>
+        <li>
+          テキストエリアを手動で選択（Ctrl+A）してコピー（Ctrl+C）してください
+        </li>
+      </ul>
 
-    <h3>Q: モバイルでも使えますか？</h3>
-    <p>A: はい、モバイルブラウザでも使用できますが、画面サイズの関係上、デスクトップでの使用を推奨します。</p>
+      <h2>6. よくある質問</h2>
 
-    <hr style="margin: 2rem 0;">
+      <h3>Q: 設定は保存されますか？</h3>
+      <p>
+        A:
+        はい、設定はブラウザのlocalStorageに自動保存されます。ただし、アップロードした画像は保存されませんので、ページを再読み込みした際は再度選択する必要があります。
+      </p>
 
-    <p><a href="../index.html" class="back-link">← ツールに戻る</a></p>
-  </main>
+      <h3>Q: 商用利用はできますか？</h3>
+      <p>
+        A:
+        このツール自体はMITライセンスで公開されており、商用利用可能です。Google
+        Fontsも商用利用可能です。ローカルフォントを使用する場合は、各フォントのライセンスをご確認ください。
+      </p>
 
-  <footer class="footer">
-    <p class="footer__copyright">© 2026 YouTube Counter CSS Generator - MIT License</p>
-  </footer>
-</body>
+      <h3>Q: モバイルでも使えますか？</h3>
+      <p>
+        A:
+        はい、モバイルブラウザでも使用できますが、画面サイズの関係上、デスクトップでの使用を推奨します。
+      </p>
+
+      <hr style="margin: 2rem 0" />
+
+      <p><a href="../index.html" class="back-link">← ツールに戻る</a></p>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">
+        © 2026 YouTube Counter CSS Generator - MIT License
+      </p>
+    </footer>
+  </body>
 </html>
