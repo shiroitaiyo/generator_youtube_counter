@@ -71,27 +71,17 @@ body,
     background-color: rgba(0, 0, 0, 0) !important;
     background: none !important;
     overflow: hidden !important;
-}
-
-:root {
-    font-size: 72px;
-    --TextColor: ${textColor};
-    --BackgroundWidhtSize: ${backgroundWidth}px;
-    --BackgroundHeightSize: ${backgroundHeight}px;
-    --counter-background: ${backgroundUrl};
-    --belt-top: ${positionY}%;
-    --belt-left: ${positionX}%;
-    --comma-margin-top: 0px;
-    --comma-margin-left: 0px;
+    width: ${backgroundWidth}px !important;
+    height: ${backgroundHeight}px !important;
 }
 
 * {
     margin: 0 !important;
     padding: 0 !important;
+    box-sizing: border-box !important;
     background-color: rgba(0, 0, 0, 0) !important;
     scrollbar-width: none !important;
-    overflow: visible !important;
-    color: var(--TextColor) !important;
+    color: ${textColor} !important;
     font-family: ${fontFamilyValue};
     font-weight: 400;
     font-style: normal;
@@ -101,8 +91,9 @@ body,
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: var(--BackgroundWidhtSize) !important;
-    height: var(--BackgroundHeightSize) !important;
+    width: ${backgroundWidth}px !important;
+    height: ${backgroundHeight}px !important;
+    overflow: visible !important;
 }
 
 #counter-area.small-counter-area.style-scope.yta-explore-subscribers {
@@ -111,28 +102,36 @@ body,
     left: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    background-image: var(--counter-background) !important;
-    width: var(--BackgroundWidhtSize) !important;
-    height: var(--BackgroundHeightSize) !important;
-    background-repeat: no-repeat;
+    background-image: ${backgroundUrl} !important;
+    width: ${backgroundWidth}px !important;
+    height: ${backgroundHeight}px !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
     overflow: visible !important;
-    background-size: cover;
     min-height: initial !important;
 }
 
 #counter.small-counter.style-scope.yta-explore-subscribers {
     position: absolute !important;
-    top: var(--belt-top) !important;
-    left: var(--belt-left) !important;
+    top: ${positionY}% !important;
+    left: ${positionX}% !important;
     transform: translate(-50%, -50%) scale(${scaleValue}) rotate(${rotation}deg) !important;
     transform-origin: center center !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     text-shadow: ${textShadow};
+    white-space: nowrap !important;
 }
 
-.counter.yta-smooth-counter .counter-symbol.yta-smooth-counter .counter-value.yta-smooth-counter:not([is-digit]) {
-    margin-top: var(--comma-margin-top) !important;
-    margin-left: var(--comma-margin-left) !important;
+.counter.yta-smooth-counter {
+    display: inline-block !important;
+    overflow: hidden !important;
+    clip-path: inset(${clipAmount}px 0 0 0);
+    white-space: nowrap !important;
+}
+
+.counter.yta-smooth-counter .counter-symbol.yta-smooth-counter {
+    display: inline-block !important;
 }
 
 .counter.yta-smooth-counter .counter-symbol.yta-smooth-counter .counter-value.yta-smooth-counter:not([is-digit]),
@@ -158,11 +157,6 @@ body > *:not(yta-explore-dialog) {
 #counter.small-counter.style-scope.yta-explore-subscribers {
     --digit-width: ${digitWidth}px;
     --non-digit-width: 0;
-}
-
-.counter.yta-smooth-counter {
-    overflow: hidden !important;
-    clip-path: inset(${clipAmount}px 0 0 0);
 }`;
 
     return css;
