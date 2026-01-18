@@ -25,6 +25,7 @@ const PreviewManager = (() => {
     showComma: true,
     backgroundWidth: 1088,
     backgroundHeight: 639,
+    previewNumber: 123456,
   };
 
   // デバウンス用タイマー
@@ -135,8 +136,11 @@ const PreviewManager = (() => {
         : `"${fontFamily}", sans-serif`;
     previewCounter.style.fontFamily = fontFamilyValue;
 
-    // カンマ表示
-    previewCounter.textContent = showComma ? '123,456' : '123456';
+    // プレビュー数値の表示（カンマ表示設定を反映）
+    const number = currentState.previewNumber || 0;
+    previewCounter.textContent = showComma
+      ? number.toLocaleString()
+      : number.toString();
   }
 
   /**
@@ -156,6 +160,22 @@ const PreviewManager = (() => {
     if (previewBackground) {
       previewBackground.style.backgroundImage = 'none';
       previewBackground.style.backgroundColor = '#333';
+    }
+  }
+
+  /**
+   * プレビュー数値を設定する
+   * @param {number} number - 表示する数値
+   * @param {boolean} showComma - カンマを表示するか
+   */
+  function setPreviewNumber(number, showComma) {
+    currentState.previewNumber = number;
+    currentState.showComma = showComma;
+
+    if (previewCounter) {
+      previewCounter.textContent = showComma
+        ? number.toLocaleString()
+        : number.toString();
     }
   }
 
@@ -274,6 +294,7 @@ const PreviewManager = (() => {
     updateImmediate,
     setBackgroundImage,
     clearBackgroundImage,
+    setPreviewNumber,
     updateGoogleFontPreview,
     updateLocalFontPreview,
     loadGoogleFont,

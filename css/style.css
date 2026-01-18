@@ -162,6 +162,28 @@ a:hover {
   overflow: auto;
 }
 
+.preview-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.setting-label--inline {
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+.number-input--preview {
+  width: 120px;
+}
+
+.preview-hint {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
 .preview-area {
   display: flex;
   justify-content: center;

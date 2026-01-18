@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const imageInput = document.getElementById('imageInput');
   const fileName = document.getElementById('fileName');
   const templateSelect = document.getElementById('templateSelect');
+  const previewNumber = document.getElementById('previewNumber');
   const positionX = document.getElementById('positionX');
   const positionXNum = document.getElementById('positionXNum');
   const positionY = document.getElementById('positionY');
@@ -198,6 +199,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // テンプレート選択
     templateSelect.addEventListener('change', handleTemplateChange);
 
+    // プレビュー数値
+    previewNumber.addEventListener('input', handlePreviewNumberChange);
+
     // スライダーと数値入力の同期
     setupSliderSync(positionX, positionXNum);
     setupSliderSync(positionY, positionYNum);
@@ -250,6 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // その他の設定
     showComma.addEventListener('change', () => {
+      updatePreviewNumber();
       updatePreview();
       generateCSS();
       saveSettings();
@@ -332,6 +337,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     hexInput.addEventListener('change', saveSettings);
+  }
+
+  // ========================================================================
+  // プレビュー数値処理
+  // ========================================================================
+
+  function handlePreviewNumberChange() {
+    let value = parseInt(previewNumber.value, 10);
+
+    // 範囲制限
+    if (isNaN(value) || value < 0) {
+      value = 0;
+    } else if (value > 9999999) {
+      value = 9999999;
+    }
+
+    previewNumber.value = value;
+    updatePreviewNumber();
+  }
+
+  function updatePreviewNumber() {
+    const value = parseInt(previewNumber.value, 10) || 0;
+    PreviewManager.setPreviewNumber(value, showComma.checked);
   }
 
   // ========================================================================
@@ -601,6 +629,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ? googleFontSelect.value
         : localFontInput.value || 'sans-serif';
 
+    const previewValue = parseInt(previewNumber.value, 10) || 0;
+
     PreviewManager.update({
       textColor: textColor.value,
       positionX: parseInt(positionX.value, 10),
@@ -615,6 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showComma: showComma.checked,
       backgroundWidth: parseInt(bgWidth.value, 10),
       backgroundHeight: parseInt(bgHeight.value, 10),
+      previewNumber: previewValue,
     });
   }
 
