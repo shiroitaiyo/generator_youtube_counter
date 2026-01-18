@@ -1,10 +1,10 @@
 {
-    "folders": [
-        {
-            "path": "."
-        }
-    ],
-	"settings": {
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
 		// ミニマップを非表示にする
 		"editor.minimap.enabled": false,
 		// カラーカスタマイズ
@@ -15,5 +15,157 @@
 
 		// フォント設定
 		"editor.fontFamily": "Consolas, 'Meiryo UI','Courier New', monospace",
-	}
+
+    // エディタ設定
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.wordWrap": "on",
+    "editor.rulers": [80, 120],
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+
+    // ファイル設定
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true
+    },
+
+    // HTML設定
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.suggest.insertMode": "replace"
+    },
+
+    // CSS設定
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "css.validate": true,
+    "css.lint.unknownAtRules": "ignore",
+
+    // JavaScript設定
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "javascript.preferences.quoteStyle": "single",
+
+    // Prettier設定
+    "prettier.singleQuote": true,
+    "prettier.semi": true,
+    "prettier.trailingComma": "es5",
+    "prettier.printWidth": 80,
+    "prettier.tabWidth": 2,
+    "prettier.arrowParens": "always",
+
+    // ESLint設定
+    "eslint.validate": [
+      "javascript",
+      "html"
+    ],
+
+    // Live Server設定
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.donotVerifyTags": true,
+
+    // Emmet設定
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact"
+    },
+    "emmet.triggerExpansionOnTab": true,
+
+    // 検索設定
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/.git": true
+    },
+  },
+  "extensions": {
+    "recommendations": [
+      // 必須
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "ritwickdey.liveserver",
+
+      // HTML/CSS
+      "formulahendry.auto-rename-tag",
+
+      // JavaScript
+      "xabikos.javascriptsnippets",
+      "christian-kohler.path-intellisense",
+
+      // ユーティリティ
+      "yzhang.markdown-all-in-one",
+
+      // Git
+      "eamodio.gitlens",
+      "mhutchie.git-graph",
+
+      // デバッグ・プレビュー
+      "ms-vscode.live-server",
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Launch Chrome",
+        "url": "http://localhost:5500",
+        "webRoot": "${workspaceFolder}",
+        "sourceMaps": true
+      },
+      {
+        "type": "firefox",
+        "request": "launch",
+        "name": "Launch Firefox",
+        "url": "http://localhost:5500",
+        "webRoot": "${workspaceFolder}",
+        "pathMappings": [
+          {
+            "url": "http://localhost:5500",
+            "path": "${workspaceFolder}"
+          }
+        ]
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Start Live Server",
+        "type": "shell",
+        "command": "echo",
+        "args": ["Right-click index.html and select 'Open with Live Server'"],
+        "problemMatcher": []
+      },
+      {
+        "label": "Format All Files",
+        "type": "shell",
+        "command": "npx",
+        "args": ["prettier", "--write", "**/*.{html,css,js,md}"],
+        "problemMatcher": []
+      },
+      {
+        "label": "Validate HTML",
+        "type": "shell",
+        "command": "echo",
+        "args": ["Use HTML validation extension or online validator"],
+        "problemMatcher": []
+      }
+    ]
+  }
 }

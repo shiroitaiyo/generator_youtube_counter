@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "ritwickdey.liveserver",
+      "formulahendry.auto-rename-tag",
+      "xabikos.javascriptsnippets",
+      "christian-kohler.path-intellisense",
+      "yzhang.markdown-all-in-one",
+      "eamodio.gitlens",
+      "mhutchie.git-graph",
+      "ms-vscode.live-server"
+  ]
+}
