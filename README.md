@@ -1,5 +1,8 @@
 # YouTube登録者数カウンターCSS生成ツール
 
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/shiroitaiyo/generator_youtube_counter/releases)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 YouTube Analyticsの登録者数カウンターをカスタマイズするためのCSSを、簡単に生成できるWebアプリケーションです。
 
 ## 🎯 特徴
