@@ -114,8 +114,8 @@ const PreviewManager = (() => {
     previewBackground.style.width = `${previewWidth}px`;
     previewBackground.style.height = `${previewHeight}px`;
 
-    // カウンターの位置（プレビュー用にスケール調整）
-    previewCounter.style.left = `${50 + positionX / 2}%`;
+    // カウンターの位置（OBSと同じ計算方法: left/topの%指定 + translate(-50%, -50%)）
+    previewCounter.style.left = `${positionX}%`;
     previewCounter.style.top = `${positionY}%`;
     previewCounter.style.transform = `translate(-50%, -50%) scale(${scale / 100}) rotate(${rotation}deg)`;
 
