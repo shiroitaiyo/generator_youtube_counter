@@ -75,13 +75,17 @@ YouTube Analyticsの登録者数カウンターをカスタマイズするため
 - デフォルト値: 影あり、ぼかし2px、色#FFFFFF
 
 **フォント設定**
-- プリセットから選択（ドロップダウン）
-- 選択肢:
-  - Moirai One（デフォルト、デザイン性重視）
-  - Roboto（シンプル、読みやすい）
-  - Orbitron（デジタル風）
-  - Press Start 2P（レトロゲーム風）
-  - Bebas Neue（スタイリッシュ）
+- フォント選択方式（タブ切り替え）:
+  1. **Google Fonts（推奨）**: プリセットから選択
+     - Moirai One（デフォルト、デザイン性重視）
+     - Roboto（シンプル、読みやすい）
+     - Orbitron（デジタル風）
+     - Press Start 2P（レトロゲーム風）
+     - Bebas Neue（スタイリッシュ）
+  2. **ローカルフォント**: PCにインストール済みのフォントを選択
+     - Font Access API または フォント名の直接入力
+     - ライセンス注意書き表示
+     - プレビューで確認可能
 
 **カンマ表示**
 - 3桁区切りカンマ: チェックボックス
@@ -201,7 +205,25 @@ YouTube登録者数カウンターCSS生成ツール
   影のぼかし: [▬▬●▬▬] 2px
 
 フォント
-  [Moirai One ▼]
+  [Google Fonts] [ローカルフォント] ← タブ切り替え
+  
+  Google Fonts選択時:
+    [Moirai One ▼]
+  
+  ローカルフォント選択時:
+    ┌─────────────────────────────┐
+    │ ⚠️ 注意: ローカルフォントを使用する場合、│
+    │ フォントのライセンスはユーザーの │
+    │ 責任で確認してください。     │
+    └─────────────────────────────┘
+    
+    方法1: フォント一覧から選択
+      [Arial ▼] ← PCのフォント一覧
+    
+    方法2: フォント名を直接入力
+      [フォント名を入力] 例: "Yu Gothic"
+    
+    プレビュー: [123456] ← 選択フォントで表示
 
 表示オプション
   カンマを表示: [☐]
@@ -356,7 +378,8 @@ body > *:not(yta-explore-dialog) {
 | 回転角度 | transform: rotate() | -20deg |
 | 影のぼかし | text-shadow blur | 2px |
 | 影の色 | text-shadow color | #FFFFFF |
-| フォント | font-family | Moirai One |
+| フォント（Google） | @import + font-family | Moirai One |
+| フォント（ローカル） | font-family のみ | （ユーザー入力） |
 | カンマ表示 | display | none |
 | 背景幅 | --BackgroundWidhtSize | 1088px |
 | 背景高さ | --BackgroundHeightSize | 639px |
@@ -509,7 +532,8 @@ function generateCSS(settings) {
     "positionY": 41,
     "scale": 270,
     "rotation": -20,
-    "fontFamily": "Moirai One",
+    "fontType": "google", // "google" または "local"
+    "fontFamily": "Moirai One", // Google Fonts名 または ローカルフォント名
     "shadowBlur": 2,
     "shadowColor": "#FFFFFF",
     "showComma": false,
@@ -527,7 +551,9 @@ function generateCSS(settings) {
 - 設定データのみ保存（数KB程度）
 - 画像データは保存しない（容量超過防止）
 
-## 12. 使用するGoogle Fonts
+## 12. フォント仕様
+
+### 12.1 Google Fonts（商用利用可能）
 
 すべて**商用利用可能**（SIL Open Font License等）
 
@@ -551,6 +577,167 @@ function generateCSS(settings) {
    - ライセンス: SIL Open Font License
    - URL: https://fonts.google.com/specimen/Bebas+Neue
 
+### 12.2 ローカルフォント対応
+
+#### 12.2.1 技術的実装
+
+**方法1: Local Font Access API（推奨）**
+```javascript
+// Chrome 103+, Edge 103+で利用可能
+async function getLocalFonts() {
+  try {
+    // ユーザーに権限を求める
+    const status = await navigator.permissions.query({ name: 'local-fonts' });
+    
+    if (status.state === 'granted') {
+      // インストール済みフォント一覧を取得
+      const fonts = await window.queryLocalFonts();
+      return fonts.map(font => ({
+        family: font.family,
+        fullName: font.fullName,
+        postscriptName: font.postscriptName
+      }));
+    }
+  } catch (error) {
+    console.log('Local Font Access API not supported');
+    return null;
+  }
+}
+```
+
+**方法2: フォント名の直接入力（フォールバック）**
+```javascript
+// すべてのブラウザで動作
+function applyCustomFont(fontName) {
+  // CSS font-familyに直接指定
+  return `font-family: "${fontName}", sans-serif;`;
+}
+```
+
+**方法3: フォント検出（補助）**
+```javascript
+// フォントが実際に利用可能か確認
+function isFontAvailable(fontName) {
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  
+  context.font = '72px monospace';
+  const baselineWidth = context.measureText('mmmmmmmmmmlli').width;
+  
+  context.font = `72px "${fontName}", monospace`;
+  const testWidth = context.measureText('mmmmmmmmmmlli').width;
+  
+  return baselineWidth !== testWidth;
+}
+```
+
+#### 12.2.2 ブラウザ対応状況
+
+| 機能 | Chrome | Firefox | Safari | Edge |
+|-----|--------|---------|--------|------|
+| Local Font Access API | 103+ | ❌ | ❌ | 103+ |
+| フォント名直接入力 | ✅ | ✅ | ✅ | ✅ |
+| フォント検出 | ✅ | ✅ | ✅ | ✅ |
+
+#### 12.2.3 UI実装方針
+
+1. **Local Font Access API対応ブラウザ**:
+   - フォント一覧をドロップダウンで表示
+   - リアルタイムプレビュー
+
+2. **非対応ブラウザ**:
+   - フォント名の直接入力のみ
+   - フォント検出機能で存在確認
+   - 警告メッセージ表示
+
+3. **共通**:
+   - 入力補完機能（一般的なフォント名のサジェスト）
+   - プレビュー機能で実際の表示を確認
+
+#### 12.2.4 ライセンス注意書き
+
+**UI表示内容:**
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️ ローカルフォント使用時の注意
+
+ローカルフォントを使用する場合、フォントの
+ライセンスをご自身で確認してください。
+
+・商用利用可能か
+・再配布可能か（CSSに埋め込む場合）
+・著作権表示が必要か
+
+不明な場合は、Google Fonts（左タブ）の
+使用を推奨します。すべて商用利用可能です。
+
+ライセンス確認の責任はユーザーにあります。
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+#### 12.2.5 一般的なフォントの例
+
+**Windows標準フォント:**
+- Arial（商用利用可能）
+- Times New Roman（商用利用可能）
+- Courier New（商用利用可能）
+- Verdana（商用利用可能）
+
+**macOS標準フォント:**
+- Helvetica（商用利用可能）
+- Times（商用利用可能）
+- Courier（商用利用可能）
+
+**日本語フォント（要ライセンス確認）:**
+- Yu Gothic（游ゴシック）
+- Meiryo（メイリオ）
+- MS Gothic（MS ゴシック）
+- Hiragino（ヒラギノ）
+
+**注意**: 日本語フォントは商用利用の制限がある場合があるため、
+ユーザーに明示的に確認を促す
+
+#### 12.2.6 生成されるCSS
+
+**Google Fonts選択時:**
+```css
+@import url('https://fonts.googleapis.com/css2?family=Moirai+One&display=swap');
+
+* {
+    font-family: "Moirai One", system-ui;
+}
+```
+
+**ローカルフォント選択時:**
+```css
+/* Google Fontsのimportは含まれない */
+
+* {
+    font-family: "{ユーザー入力のフォント名}", sans-serif;
+}
+```
+
+### 12.3 フォント選択フロー
+
+```
+ユーザーがフォントタブを選択
+├─ Google Fontsタブ
+│  └─ プリセットから選択（5種類）
+│     └─ @importとfont-familyを生成
+│
+└─ ローカルフォントタブ
+   ├─ ライセンス注意書き表示
+   ├─ ブラウザチェック
+   │  ├─ Local Font Access API対応
+   │  │  └─ フォント一覧取得 → ドロップダウン表示
+   │  └─ 非対応
+   │     └─ テキスト入力フィールド表示
+   ├─ フォント名入力/選択
+   ├─ フォント存在確認（オプション）
+   ├─ プレビュー更新
+   └─ font-familyのみ生成（@importなし）
+```
+
 ## 13. テスト項目
 
 ### 13.1 機能テスト
@@ -560,6 +747,12 @@ function generateCSS(settings) {
 - [ ] クリップボードコピー機能
 - [ ] 設定の保存・復元
 - [ ] 設定リセット機能
+- [ ] Google Fontsの選択と適用
+- [ ] ローカルフォントの選択と適用
+- [ ] Local Font Access APIの動作（対応ブラウザ）
+- [ ] フォント名直接入力の動作
+- [ ] フォント検出機能
+- [ ] ライセンス注意書きの表示
 
 ### 13.2 ブラウザ互換性テスト
 - [ ] Chrome（最新版）
@@ -679,9 +872,22 @@ https://[ユーザー名].github.io/youtube-counter-css-generator/
   - 推奨: 背景画像は500KB以下を推奨
   - 警告表示: 5MB超過時は警告
 
-### 20.2 ユーザーサポート
+### 20.2 ローカルフォント機能の制限事項
+- **Local Font Access API対応ブラウザ**: Chrome 103+, Edge 103+のみ
+- **非対応ブラウザ**: フォント名の直接入力のみ可能
+- **ライセンス責任**: ユーザー自身がフォントライセンスを確認する必要がある
+- **フォント埋め込み**: CSSにはフォント名のみ記載（フォントファイル自体は埋め込まれない）
+- **配布時の注意**: 生成したCSSを他者に配布する場合、受け取る側も同じフォントをインストールしている必要がある
+
+### 20.3 推奨運用
+- **配信用途**: ローカルフォント使用OK（自分のPC環境でのみ表示）
+- **配布用途**: Google Fonts推奨（誰でも同じ表示が可能）
+
+### 20.4 ユーザーサポート
 - GitHub Issues でのサポート
 - FAQページの用意
+  - ローカルフォントのライセンス確認方法
+  - フォントが表示されない場合の対処法
 - サンプル画像の提供
 
 ### 20.3 更新・メンテナンス
@@ -691,6 +897,7 @@ https://[ユーザー名].github.io/youtube-counter-css-generator/
 
 ---
 
-**仕様書バージョン**: 1.0  
+**仕様書バージョン**: 1.1  
 **作成日**: 2026-01-18  
-**最終更新日**: 2026-01-18
+**最終更新日**: 2026-01-18  
+**更新内容**: ローカルフォント選択機能を追加
