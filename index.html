@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube登録者数カウンターCSS生成ツール</title>
+  <meta name="description" content="YouTube Analyticsの登録者数カウンターをカスタマイズするCSSを簡単に生成できるツールです。">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Google Fonts プリロード -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="header">
+    <h1 class="header__title">YouTube登録者数カウンターCSS生成ツール</h1>
+    <div class="header__privacy">
+      <span class="privacy-icon">🔒</span>
+      <span>選択した画像はブラウザ内でのみ処理され、サーバーには一切送信されません。</span>
+    </div>
+  </header>
+
+  <!-- メインエリア -->
+  <main class="main">
+    <div class="main__container">
+      <!-- プレビューエリア -->
+      <section class="preview-section">
+        <h2 class="section-title">プレビュー</h2>
+        <div class="preview-controls">
+          <label class="setting-label setting-label--inline">プレビュー数値:</label>
+          <input type="number" id="previewNumber" value="123456" min="0" max="9999999" class="number-input number-input--preview">
+          <span class="preview-hint">（0～9,999,999）</span>
+        </div>
+        <div class="preview-wrapper">
+          <div class="preview-area" id="previewArea">
+            <div class="preview-background" id="previewBackground">
+              <div class="preview-counter" id="previewCounter">123,456</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 設定パネル -->
+      <section class="settings-section">
+        <h2 class="section-title">設定</h2>
+
+        <!-- 基本設定 -->
+        <div class="settings-group">
+          <h3 class="settings-group__title">基本設定</h3>
+
+          <!-- 背景画像選択 -->
+          <div class="setting-item">
+            <label class="setting-label">背景画像</label>
+            <div class="image-upload">
+              <input type="file" id="imageInput" accept="image/png,image/jpeg,image/gif,image/webp" class="image-input">
+              <label for="imageInput" class="image-upload-btn">
+                <span class="upload-icon">📁</span>
+                ファイルを選択
+              </label>
+              <span class="file-name" id="fileName">選択されていません</span>
+            </div>
+            <div class="template-select">
+              <label class="setting-label setting-label--sub">またはテンプレートから選択:</label>
+              <select id="templateSelect" class="select-input">
+                <option value="">-- テンプレートを選択 --</option>
+                <option value="simple">シンプル（単色背景）</option>
+                <option value="gradient">グラデーション</option>
+                <option value="frame">フレーム風</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 数字の位置 -->
+          <div class="setting-item">
+            <label class="setting-label">数字の位置</label>
+            <div class="position-controls">
+              <div class="control-row">
+                <label class="control-label">X座標:</label>
+                <input type="range" id="positionX" min="-100" max="100" value="-2" class="slider">
+                <input type="number" id="positionXNum" value="-2" min="-100" max="100" class="number-input">
+                <span class="unit">%</span>
+              </div>
+              <div class="control-row">
+                <label class="control-label">Y座標:</label>
+                <input type="range" id="positionY" min="-100" max="100" value="41" class="slider">
+                <input type="number" id="positionYNum" value="41" min="-100" max="100" class="number-input">
+                <span class="unit">%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 数字のサイズ -->
+          <div class="setting-item">
+            <label class="setting-label">数字のサイズ</label>
+            <div class="control-row">
+              <label class="control-label">拡大率:</label>
+              <input type="range" id="scale" min="50" max="500" value="270" class="slider">
+              <input type="number" id="scaleNum" value="270" min="50" max="500" class="number-input">
+              <span class="unit">%</span>
+            </div>
+          </div>
+
+          <!-- 数字の色 -->
+          <div class="setting-item">
+            <label class="setting-label">数字の色</label>
+            <div class="color-control">
+              <input type="color" id="textColor" value="#FFFFFF" class="color-picker">
+              <input type="text" id="textColorHex" value="#FFFFFF" class="hex-input" maxlength="7">
+            </div>
+          </div>
+
+          <!-- 数字の回転 -->
+          <div class="setting-item">
+            <label class="setting-label">数字の回転</label>
+            <div class="control-row">
+              <label class="control-label">角度:</label>
+              <input type="range" id="rotation" min="-45" max="45" value="-20" class="slider">
+              <input type="number" id="rotationNum" value="-20" min="-45" max="45" class="number-input">
+              <span class="unit">°</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 詳細設定（折りたたみ） -->
+        <details class="settings-group settings-group--collapsible">
+          <summary class="settings-group__title settings-group__title--collapsible">
+            <span class="collapse-icon">▶</span>
+            詳細設定
+          </summary>
+
+          <!-- テキスト装飾 -->
+          <div class="setting-item">
+            <label class="setting-label">テキスト装飾</label>
+            <div class="checkbox-control">
+              <input type="checkbox" id="shadowEnabled" checked class="checkbox-input">
+              <label for="shadowEnabled" class="checkbox-label">影を付ける</label>
+            </div>
+            <div class="control-row shadow-control" id="shadowControls">
+              <label class="control-label">影のぼかし:</label>
+              <input type="range" id="shadowBlur" min="0" max="10" value="2" class="slider">
+              <input type="number" id="shadowBlurNum" value="2" min="0" max="10" class="number-input">
+              <span class="unit">px</span>
+            </div>
+            <div class="color-control shadow-control" id="shadowColorControl">
+              <label class="control-label">影の色:</label>
+              <input type="color" id="shadowColor" value="#FFFFFF" class="color-picker">
+              <input type="text" id="shadowColorHex" value="#FFFFFF" class="hex-input" maxlength="7">
+            </div>
+          </div>
+
+          <!-- フォント設定 -->
+          <div class="setting-item">
+            <label class="setting-label">フォント</label>
+            <div class="font-tabs">
+              <button type="button" class="font-tab font-tab--active" data-tab="google">Google Fonts</button>
+              <button type="button" class="font-tab" data-tab="local">ローカルフォント</button>
+            </div>
+
+            <!-- Google Fonts タブ -->
+            <div class="font-panel font-panel--active" id="googleFontsPanel">
+              <select id="googleFontSelect" class="select-input">
+                <option value="Moirai One">Moirai One（デザイン性重視）</option>
+                <option value="Roboto">Roboto（シンプル、読みやすい）</option>
+                <option value="Orbitron">Orbitron（デジタル風）</option>
+                <option value="Press Start 2P">Press Start 2P（レトロゲーム風）</option>
+                <option value="Bebas Neue">Bebas Neue（スタイリッシュ）</option>
+              </select>
+              <div class="font-preview" id="googleFontPreview">123456</div>
+            </div>
+
+            <!-- ローカルフォント タブ -->
+            <div class="font-panel" id="localFontsPanel">
+              <div class="license-warning">
+                <span class="warning-icon">⚠️</span>
+                <div class="warning-text">
+                  <strong>ローカルフォント使用時の注意</strong>
+                  <p>ローカルフォントを使用する場合、フォントのライセンスをご自身で確認してください。</p>
+                  <ul>
+                    <li>商用利用可能か</li>
+                    <li>再配布可能か</li>
+                    <li>著作権表示が必要か</li>
+                  </ul>
+                  <p>不明な場合は、Google Fontsの使用を推奨します。</p>
+                </div>
+              </div>
+
+              <!-- フォント選択方法 -->
+              <div class="local-font-method" id="localFontMethod">
+                <div class="method-select" id="fontApiSupported" style="display: none;">
+                  <label class="setting-label setting-label--sub">フォント一覧から選択:</label>
+                  <button type="button" id="loadFontsBtn" class="btn btn--secondary">フォント一覧を読み込む</button>
+                  <select id="localFontSelect" class="select-input" style="display: none;">
+                    <option value="">-- フォントを選択 --</option>
+                  </select>
+                </div>
+
+                <div class="method-input">
+                  <label class="setting-label setting-label--sub">フォント名を直接入力:</label>
+                  <input type="text" id="localFontInput" class="text-input" placeholder="例: Yu Gothic, Meiryo">
+                  <div class="font-status" id="fontStatus"></div>
+                </div>
+              </div>
+
+              <div class="font-preview" id="localFontPreview">123456</div>
+            </div>
+          </div>
+
+          <!-- カンマ表示 -->
+          <div class="setting-item">
+            <label class="setting-label">表示オプション</label>
+            <div class="checkbox-control">
+              <input type="checkbox" id="showComma" class="checkbox-input">
+              <label for="showComma" class="checkbox-label">3桁区切りカンマを表示</label>
+            </div>
+          </div>
+
+          <!-- 背景サイズ（自動検出） -->
+          <div class="setting-item">
+            <label class="setting-label">背景サイズ（自動検出）</label>
+            <div class="size-display">
+              <span class="size-info" id="sizeInfo">画像を選択すると自動で設定されます</span>
+              <div class="size-values" id="sizeValues" style="display: none;">
+                <span>幅: <strong id="bgWidthDisplay">-</strong> px</span>
+                <span>高さ: <strong id="bgHeightDisplay">-</strong> px</span>
+              </div>
+              <div class="obs-hint" id="obsHint" style="display: none;">
+                <span class="obs-hint-icon">⚠️</span>
+                <span class="obs-hint-text">OBSのブラウザソースもこのサイズに設定してください</span>
+              </div>
+            </div>
+            <input type="hidden" id="bgWidth" value="1088">
+            <input type="hidden" id="bgHeight" value="639">
+          </div>
+
+          <!-- 数字の調整（上級者向け） -->
+          <div class="setting-item">
+            <label class="setting-label">数字の調整（上級者向け）</label>
+            <div class="advanced-controls">
+              <div class="control-row">
+                <label class="control-label">桁幅:</label>
+                <input type="number" id="digitWidth" value="46" min="10" max="200" class="number-input">
+                <span class="unit">px</span>
+              </div>
+              <div class="control-row">
+                <label class="control-label">上部クリップ:</label>
+                <input type="number" id="clipAmount" value="20" min="0" max="100" class="number-input">
+                <span class="unit">px</span>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+    </div>
+  </main>
+
+  <!-- 出力エリア -->
+  <section class="output-section">
+    <h2 class="section-title">生成されたCSS</h2>
+    <div class="output-area">
+      <textarea id="cssOutput" class="css-output" readonly placeholder="設定を調整すると、ここにCSSが生成されます..."></textarea>
+      <div class="output-actions">
+        <button type="button" id="regenerateBtn" class="btn btn--primary">
+          <span class="btn-icon">🔄</span>
+          CSS再生成
+        </button>
+        <button type="button" id="copyBtn" class="btn btn--primary">
+          <span class="btn-icon">📋</span>
+          コピー
+        </button>
+        <button type="button" id="resetBtn" class="btn btn--secondary">
+          <span class="btn-icon">⚙️</span>
+          設定をリセット
+        </button>
+        <button type="button" id="exportHtmlBtn" class="btn btn--secondary">
+          <span class="btn-icon">📄</span>
+          HTML出力
+        </button>
+      </div>
+      <div class="copy-feedback" id="copyFeedback">コピーしました！</div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="footer__links">
+      <a href="docs/guide.html" class="footer__link">📖 使い方ガイド</a>
+      <a href="#privacy" class="footer__link" id="privacyLink">🔒 プライバシーポリシー</a>
+      <a href="https://github.com/shiroitaiyo/generator_youtube_counter" class="footer__link" target="_blank" rel="noopener">💻 GitHub</a>
+    </div>
+    <p class="footer__copyright">© 2025 YouTube Counter CSS Generator v1.0.0 - MIT License</p>
+  </footer>
+
+  <!-- プライバシーポリシーモーダル -->
+  <div class="modal" id="privacyModal">
+    <div class="modal__overlay"></div>
+    <div class="modal__content">
+      <h2 class="modal__title">プライバシーポリシー</h2>
+      <div class="modal__body">
+        <h3>🔒 あなたのデータは安全です</h3>
+        <p>このツールは<strong>あなたのパソコン（ブラウザ）の中だけ</strong>で動作します。</p>
+
+        <h3>📷 選択した画像について</h3>
+        <ul>
+          <li>画像はインターネットに送信されません</li>
+          <li>あなたのパソコン内でのみ処理されます</li>
+          <li>ページを閉じると画像データは消えます</li>
+        </ul>
+
+        <h3>💾 設定の保存について</h3>
+        <ul>
+          <li>色やサイズなどの設定は、あなたのブラウザ内に自動保存されます</li>
+          <li>次回アクセス時に前回の設定が復元されます</li>
+          <li>保存されるのは設定値のみで、画像は保存されません</li>
+          <li>「設定をリセット」ボタンでいつでも削除できます</li>
+        </ul>
+
+        <h3>🚫 収集しないもの</h3>
+        <ul>
+          <li>個人情報は一切収集しません</li>
+          <li>アクセス解析やトラッキングは行いません</li>
+          <li>Cookieは使用しません</li>
+        </ul>
+
+        <h3>📖 オープンソース</h3>
+        <p>このプロジェクトはMITライセンスで公開されています。<br>
+        ソースコードは<a href="https://github.com/shiroitaiyo/generator_youtube_counter" target="_blank" rel="noopener">GitHub</a>で確認できます。</p>
+      </div>
+      <button type="button" class="btn btn--primary modal__close" id="closeModal">閉じる</button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="js/storage.js"></script>
+  <script src="js/preview.js"></script>
+  <script src="js/cssGenerator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

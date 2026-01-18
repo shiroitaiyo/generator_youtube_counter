@@ -1,0 +1,20 @@
+{
+  "name": "generator-youtube-counter",
+  "version": "1.0.0",
+  "description": "YouTube登録者数カウンターをカスタマイズするためのCSS生成ツール",
+  "author": "shiroitaiyo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shiroitaiyo/generator_youtube_counter"
+  },
+  "homepage": "https://shiroitaiyo.github.io/generator_youtube_counter/",
+  "keywords": [
+    "youtube",
+    "obs",
+    "css",
+    "counter",
+    "subscriber",
+    "generator"
+  ]
+}
