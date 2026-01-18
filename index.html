@@ -209,21 +209,18 @@
             </div>
           </div>
 
-          <!-- 背景サイズ -->
+          <!-- 背景サイズ（自動検出） -->
           <div class="setting-item">
-            <label class="setting-label">背景サイズ</label>
-            <div class="size-controls">
-              <div class="control-row">
-                <label class="control-label">幅:</label>
-                <input type="number" id="bgWidth" value="1088" min="100" max="3000" class="number-input number-input--wide">
-                <span class="unit">px</span>
-              </div>
-              <div class="control-row">
-                <label class="control-label">高さ:</label>
-                <input type="number" id="bgHeight" value="639" min="100" max="3000" class="number-input number-input--wide">
-                <span class="unit">px</span>
+            <label class="setting-label">背景サイズ（自動検出）</label>
+            <div class="size-display">
+              <span class="size-info" id="sizeInfo">画像を選択すると自動で設定されます</span>
+              <div class="size-values" id="sizeValues" style="display: none;">
+                <span>幅: <strong id="bgWidthDisplay">-</strong> px</span>
+                <span>高さ: <strong id="bgHeightDisplay">-</strong> px</span>
               </div>
             </div>
+            <input type="hidden" id="bgWidth" value="1088">
+            <input type="hidden" id="bgHeight" value="639">
           </div>
 
           <!-- 数字の調整（上級者向け） -->
@@ -253,6 +250,10 @@
     <div class="output-area">
       <textarea id="cssOutput" class="css-output" readonly placeholder="設定を調整すると、ここにCSSが生成されます..."></textarea>
       <div class="output-actions">
+        <button type="button" id="regenerateBtn" class="btn btn--primary">
+          <span class="btn-icon">🔄</span>
+          CSS再生成
+        </button>
         <button type="button" id="copyBtn" class="btn btn--primary">
           <span class="btn-icon">📋</span>
           コピー
@@ -275,7 +276,7 @@
     <div class="footer__links">
       <a href="docs/guide.html" class="footer__link">📖 使い方ガイド</a>
       <a href="#privacy" class="footer__link" id="privacyLink">🔒 プライバシーポリシー</a>
-      <a href="https://github.com/" class="footer__link" target="_blank" rel="noopener">💻 GitHub</a>
+      <a href="https://github.com/shiroitaiyo/generator_youtube_counter" class="footer__link" target="_blank" rel="noopener">💻 GitHub</a>
     </div>
     <p class="footer__copyright">© 2026 YouTube Counter CSS Generator - MIT License</p>
   </footer>
@@ -286,16 +287,34 @@
     <div class="modal__content">
       <h2 class="modal__title">プライバシーポリシー</h2>
       <div class="modal__body">
-        <h3>このツールについて:</h3>
+        <h3>🔒 あなたのデータは安全です</h3>
+        <p>このツールは<strong>あなたのパソコン（ブラウザ）の中だけ</strong>で動作します。</p>
+
+        <h3>📷 選択した画像について</h3>
         <ul>
-          <li>選択された画像はブラウザ内でのみ処理されます</li>
-          <li>画像データはサーバーに送信されません</li>
-          <li>設定値のみブラウザのlocalStorageに保存されます</li>
+          <li>画像はインターネットに送信されません</li>
+          <li>あなたのパソコン内でのみ処理されます</li>
+          <li>ページを閉じると画像データは消えます</li>
+        </ul>
+
+        <h3>💾 設定の保存について</h3>
+        <ul>
+          <li>色やサイズなどの設定は、あなたのブラウザ内に自動保存されます</li>
+          <li>次回アクセス時に前回の設定が復元されます</li>
+          <li>保存されるのは設定値のみで、画像は保存されません</li>
+          <li>「設定をリセット」ボタンでいつでも削除できます</li>
+        </ul>
+
+        <h3>🚫 収集しないもの</h3>
+        <ul>
           <li>個人情報は一切収集しません</li>
+          <li>アクセス解析やトラッキングは行いません</li>
           <li>Cookieは使用しません</li>
         </ul>
-        <h3>オープンソース:</h3>
-        <p>このプロジェクトはMITライセンスの下で公開されています。</p>
+
+        <h3>📖 オープンソース</h3>
+        <p>このプロジェクトはMITライセンスで公開されています。<br>
+        ソースコードは<a href="https://github.com/shiroitaiyo/generator_youtube_counter" target="_blank" rel="noopener">GitHub</a>で確認できます。</p>
       </div>
       <button type="button" class="btn btn--primary modal__close" id="closeModal">閉じる</button>
     </div>

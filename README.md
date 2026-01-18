@@ -7,27 +7,29 @@ YouTube Analyticsの登録者数カウンターをカスタマイズするため
 - **簡単操作**: スライダーとプレビューでリアルタイムに調整
 - **完全ブラウザ完結**: 画像データはサーバーに送信されません
 - **豊富なカスタマイズ**: 位置、サイズ、色、フォント、影など
+- **画像サイズ自動検出**: アップロードした画像から自動でサイズを設定
 - **Google Fonts対応**: 商用利用可能なフォントを簡単に選択
 - **ローカルフォント対応**: PCにインストールされたフォントも使用可能
 - **設定の自動保存**: 次回アクセス時に設定が復元されます
 
 ## 🚀 クイックスタート
 
-1. [ツールにアクセス](#)（GitHub Pagesリンク）
+1. [ツールにアクセス](https://shiroitaiyo.github.io/generator_youtube_counter/)
 2. 背景画像をアップロード（またはテンプレートを選択）
 3. プレビューを見ながら設定を調整
-4. 「コピー」ボタンでCSSをコピー
-5. OBS Studioのブラウザソースにペースト
+4. 「CSS再生成」ボタンで最新のCSSを生成
+5. 「コピー」ボタンでCSSをコピー
+6. OBS Studioのブラウザソースにペースト
 
 ## 📋 必要なもの
 
 - モダンブラウザ（Chrome, Firefox, Safari, Edge の最新版）
-- 背景画像（推奨: 1088x639px, 500KB以下）
+- 背景画像（推奨: 500KB以下、サイズは自動検出されます）
 
 ## 🎨 カスタマイズ項目
 
 ### 基本設定
-- 背景画像の選択
+- 背景画像の選択（サイズは自動検出）
 - 数字の位置（X/Y座標）
 - 数字のサイズ（50% ～ 500%）
 - 数字の色
@@ -37,24 +39,23 @@ YouTube Analyticsの登録者数カウンターをカスタマイズするため
 - テキストシャドウ（影）
 - フォント（Google Fonts / ローカルフォント）
 - カンマ表示の切り替え
-- 背景サイズの調整
 - 桁幅・クリップ量の調整
 
 ## 🔒 プライバシー
 
 - 選択された画像はブラウザ内でのみ処理されます
 - 画像データはサーバーに送信されません
-- 設定値のみブラウザのlocalStorageに保存されます
+- 設定値のみブラウザ内に自動保存されます
 - 個人情報は一切収集しません
 
 ## 💻 ローカル開発
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/[username]/youtube-counter-css-generator.git
+git clone https://github.com/shiroitaiyo/generator_youtube_counter.git
 
 # ディレクトリに移動
-cd youtube-counter-css-generator
+cd generator_youtube_counter
 
 # ローカルサーバーを起動（例: Live Server, http-server など）
 # VS Codeの場合: index.html を右クリック → Open with Live Server
@@ -63,7 +64,7 @@ cd youtube-counter-css-generator
 ## 📁 ファイル構成
 
 ```
-youtube-counter-css-generator/
+generator_youtube_counter/
 ├── index.html          # メインHTML
 ├── css/
 │   └── style.css       # アプリのスタイル
@@ -92,10 +93,10 @@ MIT License
 
 ## 🤝 貢献
 
-バグ報告や機能リクエストは [Issues](https://github.com/[username]/youtube-counter-css-generator/issues) からお願いします。
+バグ報告や機能リクエストは [Issues](https://github.com/shiroitaiyo/generator_youtube_counter/issues) からお願いします。
 
 ## 📮 サポート
 
 - [使い方ガイド](docs/guide.html)
 - [よくある質問](docs/guide.html#6-よくある質問)
-- [Issues](https://github.com/[username]/youtube-counter-css-generator/issues)
+- [Issues](https://github.com/shiroitaiyo/generator_youtube_counter/issues)

@@ -621,6 +621,29 @@ a:hover {
   color: var(--color-error);
 }
 
+/* Size Display */
+.size-display {
+  padding: 0.75rem;
+  background: var(--color-background);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.size-info {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.size-values {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9375rem;
+}
+
+.size-values strong {
+  color: var(--color-primary);
+}
+
 /* Shadow Controls */
 .shadow-control {
   transition: opacity var(--transition-fast);

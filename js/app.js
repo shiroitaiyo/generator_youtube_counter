@@ -46,11 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const showComma = document.getElementById('showComma');
   const bgWidth = document.getElementById('bgWidth');
   const bgHeight = document.getElementById('bgHeight');
+  const bgWidthDisplay = document.getElementById('bgWidthDisplay');
+  const bgHeightDisplay = document.getElementById('bgHeightDisplay');
+  const sizeInfo = document.getElementById('sizeInfo');
+  const sizeValues = document.getElementById('sizeValues');
   const digitWidth = document.getElementById('digitWidth');
   const clipAmount = document.getElementById('clipAmount');
 
   // 出力エリア
   const cssOutput = document.getElementById('cssOutput');
+  const regenerateBtn = document.getElementById('regenerateBtn');
   const copyBtn = document.getElementById('copyBtn');
   const resetBtn = document.getElementById('resetBtn');
   const exportHtmlBtn = document.getElementById('exportHtmlBtn');
@@ -142,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (settings.template) {
       templateSelect.value = settings.template;
       currentTemplateStyle = PreviewManager.setTemplate(settings.template);
+      // テンプレート使用時はサイズ表示
+      updateSizeDisplay(settings.backgroundWidth, settings.backgroundHeight);
     }
 
     // 影コントロールの表示状態
@@ -251,6 +258,10 @@ document.addEventListener('DOMContentLoaded', () => {
     clipAmount.addEventListener('input', debounce(handleAdvancedChange, 200));
 
     // 出力ボタン
+    regenerateBtn.addEventListener('click', () => {
+      generateCSS();
+      showRegenerateFeedback();
+    });
     copyBtn.addEventListener('click', copyCSS);
     resetBtn.addEventListener('click', resetSettings);
     exportHtmlBtn.addEventListener('click', exportHTML);
@@ -341,17 +352,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const base64 = await CSSGenerator.imageToBase64(file);
+
+      // 画像のサイズを取得
+      const dimensions = await getImageDimensions(base64);
+
+      // サイズを設定
+      bgWidth.value = dimensions.width;
+      bgHeight.value = dimensions.height;
+      updateSizeDisplay(dimensions.width, dimensions.height);
+
       currentBackgroundImage = base64;
       currentTemplateStyle = null;
       templateSelect.value = '';
       fileName.textContent = file.name;
 
       PreviewManager.setBackgroundImage(base64);
+      updatePreview();
       generateCSS();
+      saveSettings();
     } catch (error) {
       alert(error.message);
       imageInput.value = '';
     }
+  }
+
+  /**
+   * 画像のサイズを取得する
+   * @param {string} base64 - base64エンコードされた画像
+   * @returns {Promise<{width: number, height: number}>}
+   */
+  function getImageDimensions(base64) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        resolve({
+          width: img.naturalWidth,
+          height: img.naturalHeight,
+        });
+      };
+      img.onerror = () => {
+        reject(new Error('画像の読み込みに失敗しました。'));
+      };
+      img.src = base64;
+    });
+  }
+
+  /**
+   * サイズ表示を更新する
+   * @param {number} width
+   * @param {number} height
+   */
+  function updateSizeDisplay(width, height) {
+    bgWidthDisplay.textContent = width;
+    bgHeightDisplay.textContent = height;
+    sizeInfo.style.display = 'none';
+    sizeValues.style.display = 'flex';
+  }
+
+  /**
+   * サイズ表示をリセットする
+   */
+  function resetSizeDisplay() {
+    sizeInfo.style.display = 'block';
+    sizeValues.style.display = 'none';
   }
 
   // ========================================================================
@@ -366,11 +429,20 @@ document.addEventListener('DOMContentLoaded', () => {
       currentBackgroundImage = null;
       imageInput.value = '';
       fileName.textContent = '選択されていません';
+
+      // テンプレート使用時はデフォルトサイズを設定
+      const defaultWidth = 1088;
+      const defaultHeight = 639;
+      bgWidth.value = defaultWidth;
+      bgHeight.value = defaultHeight;
+      updateSizeDisplay(defaultWidth, defaultHeight);
     } else {
       currentTemplateStyle = null;
       PreviewManager.clearBackgroundImage();
+      resetSizeDisplay();
     }
 
+    updatePreview();
     generateCSS();
     saveSettings();
   }
@@ -570,6 +642,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2000);
   }
 
+  function showRegenerateFeedback() {
+    const originalText = regenerateBtn.innerHTML;
+    regenerateBtn.innerHTML = '<span class="btn-icon">✓</span> 再生成完了';
+    regenerateBtn.disabled = true;
+    setTimeout(() => {
+      regenerateBtn.innerHTML = originalText;
+      regenerateBtn.disabled = false;
+    }, 1500);
+  }
+
   function exportHTML() {
     const css = cssOutput.value;
     const html = CSSGenerator.generateHTML(css);
@@ -638,6 +720,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 影コントロールの表示状態を更新
     updateShadowControlsVisibility();
+
+    // サイズ表示をリセット
+    resetSizeDisplay();
 
     // プレビューをクリア
     PreviewManager.clearBackgroundImage();

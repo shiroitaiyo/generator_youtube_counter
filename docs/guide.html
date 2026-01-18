@@ -128,7 +128,7 @@
         <p>カウンターに使用する背景画像を準備します。</p>
         <ul>
           <li>対応形式: PNG, JPEG, GIF, WebP</li>
-          <li>推奨サイズ: 1088 x 639 ピクセル</li>
+          <li>サイズ: 自由（アップロード時に自動検出されます）</li>
           <li>推奨容量: 500KB以下（CSSのサイズを抑えるため）</li>
         </ul>
       </div>
@@ -171,7 +171,11 @@
     <div class="step">
       <div class="step-number">5</div>
       <div class="step-content">
-        <p>設定が完了したら、「コピー」ボタンをクリックしてCSSをクリップボードにコピーします。</p>
+        <p>設定が完了したら：</p>
+        <ol>
+          <li>「CSS再生成」ボタンをクリックして最新のCSSを生成</li>
+          <li>「コピー」ボタンでCSSをクリップボードにコピー</li>
+        </ol>
       </div>
     </div>
 
@@ -210,11 +214,8 @@
       <li><strong>カンマを表示</strong>: 3桁区切りのカンマを表示/非表示</li>
     </ul>
 
-    <h3>背景サイズ</h3>
-    <ul>
-      <li><strong>幅</strong>: 背景画像の表示幅（デフォルト: 1088px）</li>
-      <li><strong>高さ</strong>: 背景画像の表示高さ（デフォルト: 639px）</li>
-    </ul>
+    <h3>背景サイズ（自動検出）</h3>
+    <p>画像をアップロードすると、自動的に画像のサイズ（幅と高さ）が検出され、CSSに反映されます。手動での設定は不要です。</p>
 
     <h3>数字の調整（上級者向け）</h3>
     <ul>
@@ -230,8 +231,7 @@
       <li>以下の設定を行います：
         <ul>
           <li>URL: <code>https://studio.youtube.com/channel/[チャンネルID]/analytics/tab-subscribers/period-realtime</code></li>
-          <li>幅: 1088（または設定した値）</li>
-          <li>高さ: 639（または設定した値）</li>
+          <li>幅・高さ: ツールで表示された背景サイズの値を入力</li>
         </ul>
       </li>
       <li>「カスタムCSS」欄に生成したCSSをペーストします</li>
