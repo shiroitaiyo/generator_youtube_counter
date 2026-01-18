@@ -12,17 +12,17 @@ const PreviewManager = (() => {
   // 現在のプレビュー状態
   let currentState = {
     backgroundImage: null,
-    textColor: '#FFFFFF',
-    positionX: -2,
-    positionY: 41,
-    scale: 270,
+    textColor: '#EE9696',
+    positionX: 0,
+    positionY: 50,
+    scale: 300,
     rotation: -20,
-    fontFamily: 'Moirai One',
+    fontFamily: 'Orbitron',
     fontType: 'google',
     shadowEnabled: true,
-    shadowBlur: 2,
-    shadowColor: '#FFFFFF',
-    showComma: false,
+    shadowBlur: 10,
+    shadowColor: '#6038FF',
+    showComma: true,
     backgroundWidth: 1088,
     backgroundHeight: 639,
   };
@@ -98,13 +98,13 @@ const PreviewManager = (() => {
       backgroundHeight,
     } = currentState;
 
-    // 背景画像
+    // 背景画像（backgroundImageがある場合のみ設定）
+    // テンプレートの場合はsetTemplateで既に設定されているので触らない
     if (backgroundImage) {
       previewBackground.style.backgroundImage = `url(${backgroundImage})`;
-    } else {
-      previewBackground.style.backgroundImage = 'none';
-      previewBackground.style.backgroundColor = '#333';
+      previewBackground.style.backgroundColor = 'transparent';
     }
+    // backgroundImageがnullの場合は、現在の背景を維持（テンプレートかもしれない）
 
     // プレビューのアスペクト比を維持
     const aspectRatio = backgroundHeight / backgroundWidth;
@@ -153,7 +153,10 @@ const PreviewManager = (() => {
    */
   function clearBackgroundImage() {
     currentState.backgroundImage = null;
-    applyPreview();
+    if (previewBackground) {
+      previewBackground.style.backgroundImage = 'none';
+      previewBackground.style.backgroundColor = '#333';
+    }
   }
 
   /**
@@ -218,17 +221,21 @@ const PreviewManager = (() => {
   /**
    * テンプレート背景を設定する
    * @param {string} templateType - テンプレートの種類
+   * @returns {string} CSSで使用する背景スタイル
    */
   function setTemplate(templateType) {
     let backgroundStyle = '';
+    let previewStyle = '';
 
     switch (templateType) {
       case 'simple':
         backgroundStyle = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        previewStyle = backgroundStyle;
         break;
       case 'gradient':
         backgroundStyle =
           'linear-gradient(45deg, #f093fb 0%, #f5576c 50%, #4facfe 100%)';
+        previewStyle = backgroundStyle;
         break;
       case 'frame':
         backgroundStyle = `
@@ -236,13 +243,16 @@ const PreviewManager = (() => {
           linear-gradient(to bottom, #2c3e50 0%, #2c3e50 8%, transparent 8%, transparent 92%, #2c3e50 92%, #2c3e50 100%),
           linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)
         `;
+        previewStyle = backgroundStyle;
         break;
       default:
         backgroundStyle = 'none';
+        previewStyle = 'none';
     }
 
     if (previewBackground) {
-      previewBackground.style.backgroundImage = backgroundStyle;
+      previewBackground.style.backgroundImage = previewStyle;
+      previewBackground.style.backgroundColor = templateType ? 'transparent' : '#333';
       currentState.backgroundImage = null;
     }
 

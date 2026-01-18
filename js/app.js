@@ -99,7 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
     generateCSS();
 
     // デフォルトフォントの読み込み
-    PreviewManager.loadGoogleFont('Moirai One');
+    const settings = StorageManager.load();
+    PreviewManager.loadGoogleFont(settings.fontFamily);
   }
 
   // ========================================================================
@@ -149,6 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
       currentTemplateStyle = PreviewManager.setTemplate(settings.template);
       // テンプレート使用時はサイズ表示
       updateSizeDisplay(settings.backgroundWidth, settings.backgroundHeight);
+    } else {
+      currentTemplateStyle = null;
     }
 
     // 影コントロールの表示状態
@@ -425,6 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const template = templateSelect.value;
 
     if (template) {
+      // テンプレートを設定（PreviewManagerが背景を設定し、CSSスタイルを返す）
       currentTemplateStyle = PreviewManager.setTemplate(template);
       currentBackgroundImage = null;
       imageInput.value = '';
@@ -442,9 +446,37 @@ document.addEventListener('DOMContentLoaded', () => {
       resetSizeDisplay();
     }
 
-    updatePreview();
+    // プレビューの他の要素（色、位置など）を更新
+    updatePreviewWithoutBackground();
     generateCSS();
     saveSettings();
+  }
+
+  /**
+   * 背景以外のプレビュー要素を更新する
+   */
+  function updatePreviewWithoutBackground() {
+    const fontFamily =
+      currentFontType === 'google'
+        ? googleFontSelect.value
+        : localFontInput.value || 'sans-serif';
+
+    // PreviewManagerの状態を更新（背景は変更しない）
+    PreviewManager.update({
+      textColor: textColor.value,
+      positionX: parseInt(positionX.value, 10),
+      positionY: parseInt(positionY.value, 10),
+      scale: parseInt(scale.value, 10),
+      rotation: parseInt(rotation.value, 10),
+      fontFamily: fontFamily,
+      fontType: currentFontType,
+      shadowEnabled: shadowEnabled.checked,
+      shadowBlur: parseInt(shadowBlur.value, 10),
+      shadowColor: shadowColor.value,
+      showComma: showComma.checked,
+      backgroundWidth: parseInt(bgWidth.value, 10),
+      backgroundHeight: parseInt(bgHeight.value, 10),
+    });
   }
 
   // ========================================================================

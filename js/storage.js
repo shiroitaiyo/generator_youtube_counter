@@ -8,22 +8,22 @@ const StorageManager = (() => {
 
   // デフォルト設定値
   const DEFAULT_SETTINGS = {
-    textColor: '#FFFFFF',
-    positionX: -2,
-    positionY: 41,
-    scale: 270,
+    textColor: '#EE9696',
+    positionX: 0,
+    positionY: 50,
+    scale: 300,
     rotation: -20,
     fontType: 'google',
-    fontFamily: 'Moirai One',
+    fontFamily: 'Orbitron',
     shadowEnabled: true,
-    shadowBlur: 2,
-    shadowColor: '#FFFFFF',
-    showComma: false,
+    shadowBlur: 10,
+    shadowColor: '#6038FF',
+    showComma: true,
     backgroundWidth: 1088,
     backgroundHeight: 639,
     digitWidth: 46,
     clipAmount: 20,
-    template: '',
+    template: 'frame',
   };
 
   /**
