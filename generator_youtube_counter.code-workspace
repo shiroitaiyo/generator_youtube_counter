@@ -1,26 +1,26 @@
 {
   "folders": [
     {
-      "path": "."
-    }
+      "path": ".",
+    },
   ],
   "settings": {
-		// ミニマップを非表示にする
-		"editor.minimap.enabled": false,
-		// カラーカスタマイズ
-		"workbench.colorCustomizations": {
-			"activityBar.background": "#e2df16b4",
-			"activityBar.foreground": "#06065df5",
-		},
+    // ミニマップを非表示にする
+    "editor.minimap.enabled": false,
+    // カラーカスタマイズ
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#e2df16b4",
+      "activityBar.foreground": "#06065df5",
+    },
 
-		// フォント設定
-		"editor.fontFamily": "Consolas, 'Meiryo UI','Courier New', monospace",
+    // フォント設定
+    "editor.fontFamily": "Consolas, 'Meiryo UI','Courier New', monospace",
 
     // エディタ設定
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit"
+      "source.fixAll.eslint": "explicit",
     },
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
@@ -36,25 +36,25 @@
     "files.exclude": {
       "**/.git": true,
       "**/.DS_Store": true,
-      "**/node_modules": true
+      "**/node_modules": true,
     },
 
     // HTML設定
     "[html]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.suggest.insertMode": "replace"
+      "editor.suggest.insertMode": "replace",
     },
 
     // CSS設定
     "[css]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "css.validate": true,
     "css.lint.unknownAtRules": "ignore",
 
     // JavaScript設定
     "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "javascript.updateImportsOnFileMove.enabled": "always",
     "javascript.preferences.quoteStyle": "single",
@@ -68,10 +68,7 @@
     "prettier.arrowParens": "always",
 
     // ESLint設定
-    "eslint.validate": [
-      "javascript",
-      "html"
-    ],
+    "eslint.validate": ["javascript", "html"],
 
     // Live Server設定
     "liveServer.settings.port": 5500,
@@ -80,7 +77,7 @@
 
     // Emmet設定
     "emmet.includeLanguages": {
-      "javascript": "javascriptreact"
+      "javascript": "javascriptreact",
     },
     "emmet.triggerExpansionOnTab": true,
 
@@ -88,7 +85,7 @@
     "search.exclude": {
       "**/node_modules": true,
       "**/dist": true,
-      "**/.git": true
+      "**/.git": true,
     },
   },
   "extensions": {
@@ -114,7 +111,7 @@
 
       // デバッグ・プレビュー
       "ms-vscode.live-server",
-    ]
+    ],
   },
   "launch": {
     "version": "0.2.0",
@@ -125,22 +122,9 @@
         "name": "Launch Chrome",
         "url": "http://localhost:5500",
         "webRoot": "${workspaceFolder}",
-        "sourceMaps": true
+        "sourceMaps": true,
       },
-      {
-        "type": "firefox",
-        "request": "launch",
-        "name": "Launch Firefox",
-        "url": "http://localhost:5500",
-        "webRoot": "${workspaceFolder}",
-        "pathMappings": [
-          {
-            "url": "http://localhost:5500",
-            "path": "${workspaceFolder}"
-          }
-        ]
-      }
-    ]
+    ],
   },
   "tasks": {
     "version": "2.0.0",
@@ -150,22 +134,22 @@
         "type": "shell",
         "command": "echo",
         "args": ["Right-click index.html and select 'Open with Live Server'"],
-        "problemMatcher": []
+        "problemMatcher": [],
       },
       {
         "label": "Format All Files",
         "type": "shell",
         "command": "npx",
         "args": ["prettier", "--write", "**/*.{html,css,js,md}"],
-        "problemMatcher": []
+        "problemMatcher": [],
       },
       {
         "label": "Validate HTML",
         "type": "shell",
         "command": "echo",
         "args": ["Use HTML validation extension or online validator"],
-        "problemMatcher": []
-      }
-    ]
-  }
+        "problemMatcher": [],
+      },
+    ],
+  },
 }
