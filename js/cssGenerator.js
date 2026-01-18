@@ -57,27 +57,28 @@ const CSSGenerator = (() => {
     // カンマ表示
     const commaDisplay = showComma ? 'inline' : 'none';
 
+    // スケール値（小数に変換）
+    const scaleValue = (scale / 100).toFixed(2);
+
     // CSS生成
     const css = `${fontImport}
 
 html,
 body,
 #html-body {
-    margin: 0;
-    padding: 0;
-    background-color: rgba(100, 0, 0, 50) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: rgba(0, 0, 0, 0) !important;
     background: none !important;
+    overflow: hidden !important;
 }
 
 :root {
     font-size: 72px;
     --TextColor: ${textColor};
-    --BackgroundWidhtSize: calc(${backgroundWidth}px);
-    --BackgroundHeightSize: calc(${backgroundHeight}px);
-    --main-top: 0px;
-    --main-left: 0px;
+    --BackgroundWidhtSize: ${backgroundWidth}px;
+    --BackgroundHeightSize: ${backgroundHeight}px;
     --counter-background: ${backgroundUrl};
-    --counter-margin: 50px;
     --belt-top: ${positionY}%;
     --belt-left: ${positionX}%;
     --comma-margin-top: 0px;
@@ -85,6 +86,8 @@ body,
 }
 
 * {
+    margin: 0 !important;
+    padding: 0 !important;
     background-color: rgba(0, 0, 0, 0) !important;
     scrollbar-width: none !important;
     overflow: visible !important;
@@ -95,14 +98,20 @@ body,
 }
 
 #main-area {
-    top: var(--main-top) !important;
-    left: var(--main-left) !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
     width: var(--BackgroundWidhtSize) !important;
+    height: var(--BackgroundHeightSize) !important;
 }
 
 #counter-area.small-counter-area.style-scope.yta-explore-subscribers {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
     background-image: var(--counter-background) !important;
-    margin: var(--counter-margin) !important;
     width: var(--BackgroundWidhtSize) !important;
     height: var(--BackgroundHeightSize) !important;
     background-repeat: no-repeat;
@@ -112,10 +121,11 @@ body,
 }
 
 #counter.small-counter.style-scope.yta-explore-subscribers {
+    position: absolute !important;
     top: var(--belt-top) !important;
     left: var(--belt-left) !important;
     overflow: hidden !important;
-    transform: scale(${scale / 100}) rotate(${rotation}deg);
+    transform: scale(${scaleValue}) rotate(${rotation}deg);
     text-shadow: ${textShadow};
 }
 
@@ -130,9 +140,7 @@ body,
 }
 
 #subscribers-label.style-scope.yta-explore-subscribers {
-    background-color: #f00 !important;
-    color: rgba(0, 0, 0, 0) !important;
-    display: none;
+    display: none !important;
 }
 
 #main,

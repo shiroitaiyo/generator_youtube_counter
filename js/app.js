@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bgHeightDisplay = document.getElementById('bgHeightDisplay');
   const sizeInfo = document.getElementById('sizeInfo');
   const sizeValues = document.getElementById('sizeValues');
+  const obsHint = document.getElementById('obsHint');
   const digitWidth = document.getElementById('digitWidth');
   const clipAmount = document.getElementById('clipAmount');
 
@@ -438,6 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bgHeightDisplay.textContent = height;
     sizeInfo.style.display = 'none';
     sizeValues.style.display = 'flex';
+    obsHint.style.display = 'flex';
   }
 
   /**
@@ -446,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function resetSizeDisplay() {
     sizeInfo.style.display = 'block';
     sizeValues.style.display = 'none';
+    obsHint.style.display = 'none';
   }
 
   // ========================================================================

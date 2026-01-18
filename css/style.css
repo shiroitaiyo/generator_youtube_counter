@@ -666,6 +666,27 @@ a:hover {
   color: var(--color-primary);
 }
 
+.obs-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: #fff3e0;
+  border: 1px solid #ff9800;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+}
+
+.obs-hint-icon {
+  flex-shrink: 0;
+}
+
+.obs-hint-text {
+  color: #e65100;
+  font-weight: 500;
+}
+
 /* Shadow Controls */
 .shadow-control {
   transition: opacity var(--transition-fast);
