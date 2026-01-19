@@ -23,8 +23,8 @@ const PreviewManager = (() => {
     shadowBlur: 10,
     shadowColor: '#6038FF',
     showComma: true,
-    backgroundWidth: 1088,
-    backgroundHeight: 639,
+    backgroundWidth: 1000,
+    backgroundHeight: 600,
     previewNumber: 123456,
   };
 
