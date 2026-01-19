@@ -3,14 +3,17 @@
 ## 1. プロジェクト概要
 
 ### 1.1 目的
+
 YouTube Analyticsの登録者数カウンターをカスタマイズするためのCSSを、ITに不慣れなユーザーでも簡単に生成できるWebアプリケーションを提供する。
 
 ### 1.2 ターゲットユーザー
+
 - YouTube配信者
 - OBS Studio等の配信ソフトを使用するユーザー
 - CSS/HTMLの知識が少ない初心者
 
 ### 1.3 提供形態
+
 - **GitHub Pagesでホスティング**
 - **完全ブラウザ完結型**（サーバー通信なし）
 - **静的Webアプリケーション**（HTML/CSS/JavaScript）
@@ -18,17 +21,20 @@ YouTube Analyticsの登録者数カウンターをカスタマイズするため
 ## 2. 技術仕様
 
 ### 2.1 技術スタック
+
 - HTML5
 - CSS3
 - Vanilla JavaScript（フレームワーク不使用推奨）
 - ブラウザAPIのみ使用（FileReader、localStorage等）
 
 ### 2.2 対応ブラウザ
+
 - Chrome/Edge（最新版）
 - Firefox（最新版）
 - Safari（最新版）
 
 ### 2.3 セキュリティ・プライバシー要件
+
 - **画像データは一切サーバーに送信しない**
 - ブラウザ内でbase64エンコード処理
 - localStorageは設定値の保存のみ（画像データは保存しない）
@@ -39,6 +45,7 @@ YouTube Analyticsの登録者数カウンターをカスタマイズするため
 ### 3.1 必須機能
 
 #### 3.1.1 画像アップロード機能
+
 - ローカルファイルの選択（input type="file"）
 - 対応形式: PNG, JPEG, GIF, WebP
 - ブラウザ内でbase64エンコード
@@ -47,34 +54,41 @@ YouTube Analyticsの登録者数カウンターをカスタマイズするため
 #### 3.1.2 パラメータ設定機能（基本設定）
 
 **背景画像**
+
 - ファイル選択ボタン
 - プレビュー表示
 
 **数字の位置**
+
 - X座標: スライダー + 数値入力（範囲: -100% ～ 100%）
 - Y座標: スライダー + 数値入力（範囲: -100% ～ 100%）
 - デフォルト値: X=-2%, Y=41%
 
 **数字のサイズ**
+
 - 拡大率: スライダー（範囲: 50% ～ 500%）
 - デフォルト値: 270%
 
 **数字の色**
+
 - カラーピッカー
 - デフォルト値: #FFFFFF（白）
 
 **数字の回転**
+
 - 角度: スライダー（範囲: -45度 ～ 45度）
 - デフォルト値: -20度
 
 #### 3.1.3 パラメータ設定機能（詳細設定 - 折りたたみ可能）
 
 **テキスト装飾**
+
 - 影の有無: チェックボックス
 - 影のぼかし: スライダー（0px ～ 10px）
 - デフォルト値: 影あり、ぼかし2px、色#FFFFFF
 
 **フォント設定**
+
 - フォント選択方式（タブ切り替え）:
   1. **Google Fonts（推奨）**: プリセットから選択
      - Moirai One（デフォルト、デザイン性重視）
@@ -88,25 +102,31 @@ YouTube Analyticsの登録者数カウンターをカスタマイズするため
      - プレビューで確認可能
 
 **カンマ表示**
+
 - 3桁区切りカンマ: チェックボックス
 - デフォルト値: 非表示
 
 **背景サイズ**
-- 幅: 数値入力（デフォルト: 1088px）
-- 高さ: 数値入力（デフォルト: 639px）
+
+- 幅: 数値入力（デフォルト: 1000px）
+- 高さ: 数値入力（デフォルト: 600px）
 
 **数字の桁幅**
+
 - 各桁の幅: 数値入力（デフォルト: 46px）
 
 **数字のクリッピング**
+
 - 上部クリップ量: 数値入力（デフォルト: 20px）
 
 #### 3.1.4 リアルタイムプレビュー機能
+
 - パラメータ変更時に即座にプレビュー更新
 - プレビューエリアに背景画像とサンプル数字を表示
 - サンプル数字: "123,456"（固定）
 
 #### 3.1.5 CSS生成機能
+
 - 「CSS生成」ボタン
 - テキストエリアに完成したCSSコードを出力
 - 「コピー」ボタンでクリップボードにコピー
@@ -115,11 +135,13 @@ YouTube Analyticsの登録者数カウンターをカスタマイズするため
 ### 3.2 補助機能
 
 #### 3.2.1 設定の保存・読み込み
+
 - localStorageに設定値を保存（画像データは除く）
 - ページ再読み込み時に前回の設定を復元
 - 「設定をリセット」ボタンでデフォルト値に戻す
 
 #### 3.2.2 テンプレート機能（オプション）
+
 - プリセット背景パターンの提供
   - シンプル（単色背景）
   - グラデーション
@@ -127,6 +149,7 @@ YouTube Analyticsの登録者数カウンターをカスタマイズするため
 - テンプレート選択で画像不要で試用可能
 
 #### 3.2.3 エクスポート機能
+
 - CSS単体の出力
 - オプション: HTML + CSSのセット出力（テスト用）
 
@@ -165,6 +188,7 @@ YouTube Analyticsの登録者数カウンターをカスタマイズするため
 ### 4.2 UIコンポーネント詳細
 
 #### 4.2.1 ヘッダー
+
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 YouTube登録者数カウンターCSS生成ツール
@@ -175,6 +199,7 @@ YouTube登録者数カウンターCSS生成ツール
 ```
 
 #### 4.2.2 基本設定パネル
+
 ```
 【基本設定】
 ┌─────────────────────────┐
@@ -197,6 +222,7 @@ YouTube登録者数カウンターCSS生成ツール
 ```
 
 #### 4.2.3 詳細設定パネル（折りたたみ）
+
 ```
 ▼ 詳細設定
 
@@ -206,31 +232,31 @@ YouTube登録者数カウンターCSS生成ツール
 
 フォント
   [Google Fonts] [ローカルフォント] ← タブ切り替え
-  
+
   Google Fonts選択時:
     [Moirai One ▼]
-  
+
   ローカルフォント選択時:
     ┌─────────────────────────────┐
     │ ⚠️ 注意: ローカルフォントを使用する場合、│
     │ フォントのライセンスはユーザーの │
     │ 責任で確認してください。     │
     └─────────────────────────────┘
-    
+
     方法1: フォント一覧から選択
       [Arial ▼] ← PCのフォント一覧
-    
+
     方法2: フォント名を直接入力
       [フォント名を入力] 例: "Yu Gothic"
-    
+
     プレビュー: [123456] ← 選択フォントで表示
 
 表示オプション
   カンマを表示: [☐]
 
 背景サイズ
-  幅: [1088] px
-  高さ: [639] px
+  幅: [1000] px
+  高さ: [600] px
 
 数字の調整（上級者向け）
   桁幅: [46] px
@@ -238,6 +264,7 @@ YouTube登録者数カウンターCSS生成ツール
 ```
 
 #### 4.2.4 出力エリア
+
 ```
 【生成されたCSS】
 ┌─────────────────────────────────┐
@@ -251,11 +278,13 @@ YouTube登録者数カウンターCSS生成ツール
 ```
 
 ### 4.3 レスポンシブデザイン
+
 - デスクトップ: 2カラムレイアウト（プレビュー + 設定）
 - タブレット/スマホ: 1カラム（縦積み）
 - 最小推奨画面幅: 320px
 
 ### 4.4 色・フォント
+
 - メインカラー: #1976D2（YouTube風ブルー系）
 - アクセントカラー: #FF0000（YouTube赤）
 - 背景色: #F5F5F5（薄いグレー）
@@ -368,23 +397,23 @@ body > *:not(yta-explore-dialog) {
 
 ### 5.2 変数マッピング
 
-| UIパラメータ | CSS変数/プロパティ | デフォルト値 |
-|------------|-------------------|------------|
-| 背景画像 | --counter-background | （なし） |
-| テキスト色 | --TextColor | #FFFFFF |
-| X座標 | --belt-left | -2% |
-| Y座標 | --belt-top | 41% |
-| 拡大率 | transform: scale() | 270% |
-| 回転角度 | transform: rotate() | -20deg |
-| 影のぼかし | text-shadow blur | 2px |
-| 影の色 | text-shadow color | #FFFFFF |
-| フォント（Google） | @import + font-family | Moirai One |
-| フォント（ローカル） | font-family のみ | （ユーザー入力） |
-| カンマ表示 | display | none |
-| 背景幅 | --BackgroundWidhtSize | 1088px |
-| 背景高さ | --BackgroundHeightSize | 639px |
-| 桁幅 | --digit-width | 46px |
-| 上部クリップ | clip-path inset | 20px |
+| UIパラメータ         | CSS変数/プロパティ     | デフォルト値     |
+| -------------------- | ---------------------- | ---------------- |
+| 背景画像             | --counter-background   | （なし）         |
+| テキスト色           | --TextColor            | #FFFFFF          |
+| X座標                | --belt-left            | -2%              |
+| Y座標                | --belt-top             | 41%              |
+| 拡大率               | transform: scale()     | 270%             |
+| 回転角度             | transform: rotate()    | -20deg           |
+| 影のぼかし           | text-shadow blur       | 2px              |
+| 影の色               | text-shadow color      | #FFFFFF          |
+| フォント（Google）   | @import + font-family  | Moirai One       |
+| フォント（ローカル） | font-family のみ       | （ユーザー入力） |
+| カンマ表示           | display                | none             |
+| 背景幅               | --BackgroundWidhtSize  | 1000px           |
+| 背景高さ             | --BackgroundHeightSize | 600px            |
+| 桁幅                 | --digit-width          | 46px             |
+| 上部クリップ         | clip-path inset        | 20px             |
 
 ## 6. ファイル構成
 
@@ -412,6 +441,7 @@ youtube-counter-css-generator/
 ## 7. 機能フロー
 
 ### 7.1 基本フロー
+
 ```
 1. ユーザーがページにアクセス
    ↓
@@ -435,6 +465,7 @@ youtube-counter-css-generator/
 ```
 
 ### 7.2 画像処理フロー
+
 ```javascript
 // 疑似コード
 function handleImageUpload(file) {
@@ -443,15 +474,15 @@ function handleImageUpload(file) {
     alert('ファイルサイズが大きすぎます');
     return;
   }
-  
+
   // 2. FileReaderでbase64エンコード
   const reader = new FileReader();
   reader.onload = (e) => {
     const base64Data = e.target.result;
-    
+
     // 3. プレビュー更新
     updatePreview(base64Data);
-    
+
     // 4. CSS生成用データとして保持（サーバー送信なし）
     currentSettings.backgroundImage = base64Data;
   };
@@ -460,12 +491,13 @@ function handleImageUpload(file) {
 ```
 
 ### 7.3 CSS生成フロー
+
 ```javascript
 // 疑似コード
 function generateCSS(settings) {
   // 1. テンプレートCSSを読み込み
   let cssTemplate = getCSSTemplate();
-  
+
   // 2. 変数を置換
   cssTemplate = cssTemplate
     .replace('{フォント}', settings.fontFamily)
@@ -474,9 +506,9 @@ function generateCSS(settings) {
     .replace('{X座標}', settings.positionX)
     .replace('{Y座標}', settings.positionY)
     .replace('{拡大率}', settings.scale)
-    .replace('{回転角度}', settings.rotation)
-    // ... その他の変数
-  
+    .replace('{回転角度}', settings.rotation);
+  // ... その他の変数
+
   // 3. 出力
   return cssTemplate;
 }
@@ -485,6 +517,7 @@ function generateCSS(settings) {
 ## 8. エラーハンドリング
 
 ### 8.1 想定されるエラー
+
 1. **画像読み込みエラー**
    - 対応: エラーメッセージ表示 + デフォルト画像提案
 
@@ -537,8 +570,8 @@ function generateCSS(settings) {
     "shadowBlur": 2,
     "shadowColor": "#FFFFFF",
     "showComma": false,
-    "backgroundWidth": 1088,
-    "backgroundHeight": 639,
+    "backgroundWidth": 1000,
+    "backgroundHeight": 600,
     "digitWidth": 46,
     "clipAmount": 20
   },
@@ -548,6 +581,7 @@ function generateCSS(settings) {
 ```
 
 ### 11.2 データサイズ制限
+
 - 設定データのみ保存（数KB程度）
 - 画像データは保存しない（容量超過防止）
 
@@ -582,20 +616,21 @@ function generateCSS(settings) {
 #### 12.2.1 技術的実装
 
 **方法1: Local Font Access API（推奨）**
+
 ```javascript
 // Chrome 103+, Edge 103+で利用可能
 async function getLocalFonts() {
   try {
     // ユーザーに権限を求める
     const status = await navigator.permissions.query({ name: 'local-fonts' });
-    
+
     if (status.state === 'granted') {
       // インストール済みフォント一覧を取得
       const fonts = await window.queryLocalFonts();
-      return fonts.map(font => ({
+      return fonts.map((font) => ({
         family: font.family,
         fullName: font.fullName,
-        postscriptName: font.postscriptName
+        postscriptName: font.postscriptName,
       }));
     }
   } catch (error) {
@@ -606,6 +641,7 @@ async function getLocalFonts() {
 ```
 
 **方法2: フォント名の直接入力（フォールバック）**
+
 ```javascript
 // すべてのブラウザで動作
 function applyCustomFont(fontName) {
@@ -615,29 +651,30 @@ function applyCustomFont(fontName) {
 ```
 
 **方法3: フォント検出（補助）**
+
 ```javascript
 // フォントが実際に利用可能か確認
 function isFontAvailable(fontName) {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
-  
+
   context.font = '72px monospace';
   const baselineWidth = context.measureText('mmmmmmmmmmlli').width;
-  
+
   context.font = `72px "${fontName}", monospace`;
   const testWidth = context.measureText('mmmmmmmmmmlli').width;
-  
+
   return baselineWidth !== testWidth;
 }
 ```
 
 #### 12.2.2 ブラウザ対応状況
 
-| 機能 | Chrome | Firefox | Safari | Edge |
-|-----|--------|---------|--------|------|
-| Local Font Access API | 103+ | ❌ | ❌ | 103+ |
-| フォント名直接入力 | ✅ | ✅ | ✅ | ✅ |
-| フォント検出 | ✅ | ✅ | ✅ | ✅ |
+| 機能                  | Chrome | Firefox | Safari | Edge |
+| --------------------- | ------ | ------- | ------ | ---- |
+| Local Font Access API | 103+   | ❌      | ❌     | 103+ |
+| フォント名直接入力    | ✅     | ✅      | ✅     | ✅   |
+| フォント検出          | ✅     | ✅      | ✅     | ✅   |
 
 #### 12.2.3 UI実装方針
 
@@ -657,6 +694,7 @@ function isFontAvailable(fontName) {
 #### 12.2.4 ライセンス注意書き
 
 **UI表示内容:**
+
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⚠️ ローカルフォント使用時の注意
@@ -678,17 +716,20 @@ function isFontAvailable(fontName) {
 #### 12.2.5 一般的なフォントの例
 
 **Windows標準フォント:**
+
 - Arial（商用利用可能）
 - Times New Roman（商用利用可能）
 - Courier New（商用利用可能）
 - Verdana（商用利用可能）
 
 **macOS標準フォント:**
+
 - Helvetica（商用利用可能）
 - Times（商用利用可能）
 - Courier（商用利用可能）
 
 **日本語フォント（要ライセンス確認）:**
+
 - Yu Gothic（游ゴシック）
 - Meiryo（メイリオ）
 - MS Gothic（MS ゴシック）
@@ -700,20 +741,22 @@ function isFontAvailable(fontName) {
 #### 12.2.6 生成されるCSS
 
 **Google Fonts選択時:**
+
 ```css
 @import url('https://fonts.googleapis.com/css2?family=Moirai+One&display=swap');
 
 * {
-    font-family: "Moirai One", system-ui;
+  font-family: 'Moirai One', system-ui;
 }
 ```
 
 **ローカルフォント選択時:**
+
 ```css
 /* Google Fontsのimportは含まれない */
 
 * {
-    font-family: "{ユーザー入力のフォント名}", sans-serif;
+  font-family: '{ユーザー入力のフォント名}', sans-serif;
 }
 ```
 
@@ -741,6 +784,7 @@ function isFontAvailable(fontName) {
 ## 13. テスト項目
 
 ### 13.1 機能テスト
+
 - [ ] 画像アップロード動作
 - [ ] 各パラメータの調整とプレビュー反映
 - [ ] CSS生成の正確性
@@ -755,18 +799,21 @@ function isFontAvailable(fontName) {
 - [ ] ライセンス注意書きの表示
 
 ### 13.2 ブラウザ互換性テスト
+
 - [ ] Chrome（最新版）
 - [ ] Firefox（最新版）
 - [ ] Safari（最新版）
 - [ ] Edge（最新版）
 
 ### 13.3 レスポンシブテスト
+
 - [ ] デスクトップ（1920x1080）
 - [ ] ラップトップ（1366x768）
 - [ ] タブレット（768x1024）
 - [ ] スマートフォン（375x667）
 
 ### 13.4 パフォーマンステスト
+
 - [ ] 大きな画像（5MB）の処理時間
 - [ ] パラメータ変更時の反応速度
 - [ ] メモリリーク確認
@@ -774,18 +821,21 @@ function isFontAvailable(fontName) {
 ## 14. ドキュメント要件
 
 ### 14.1 README.md
+
 - プロジェクト概要
 - 使い方（クイックスタート）
 - ローカル開発方法
 - ライセンス情報
 
 ### 14.2 使い方ガイド（docs/guide.md）
+
 - 画像の準備方法
 - パラメータの説明
 - OBS Studioでの使用方法
 - トラブルシューティング
 
 ### 14.3 コード内コメント
+
 - 各関数の説明
 - 複雑なロジックの解説
 - TODO/FIXMEの記載
@@ -793,6 +843,7 @@ function isFontAvailable(fontName) {
 ## 15. 将来の拡張案（オプション）
 
 ### Phase 2以降の機能
+
 - 複数プリセットの保存・管理
 - エクスポート/インポート機能（JSON形式）
 - アニメーション効果の追加
@@ -803,9 +854,11 @@ function isFontAvailable(fontName) {
 ## 16. ライセンス
 
 ### 推奨ライセンス
+
 **MIT License**
 
 理由:
+
 - オープンソース
 - 商用利用可能
 - 改変・再配布自由
@@ -814,6 +867,7 @@ function isFontAvailable(fontName) {
 ## 17. プライバシーポリシー
 
 ### 表示内容
+
 ```
 【プライバシーポリシー】
 
@@ -833,6 +887,7 @@ function isFontAvailable(fontName) {
 ## 18. デプロイ手順
 
 ### GitHub Pagesへのデプロイ
+
 1. GitHubリポジトリ作成
 2. コードをpush
 3. Settings > Pages で公開設定
@@ -840,6 +895,7 @@ function isFontAvailable(fontName) {
 5. カスタムドメイン設定（オプション）
 
 ### URL例
+
 ```
 https://[ユーザー名].github.io/youtube-counter-css-generator/
 ```
@@ -847,6 +903,7 @@ https://[ユーザー名].github.io/youtube-counter-css-generator/
 ## 19. 開発優先順位
 
 ### Phase 1（MVP - Minimum Viable Product）
+
 1. 基本UI構築
 2. 画像アップロード機能
 3. 基本パラメータ調整（位置、サイズ、色、回転）
@@ -854,12 +911,14 @@ https://[ユーザー名].github.io/youtube-counter-css-generator/
 5. CSS生成・コピー機能
 
 ### Phase 2（機能拡充）
+
 1. 詳細設定追加
 2. テンプレート機能
 3. 設定の保存・復元
 4. エラーハンドリング強化
 
 ### Phase 3（品質向上）
+
 1. レスポンシブ対応
 2. アクセシビリティ対応
 3. パフォーマンス最適化
@@ -868,11 +927,13 @@ https://[ユーザー名].github.io/youtube-counter-css-generator/
 ## 20. 補足事項
 
 ### 20.1 技術的制約
+
 - base64エンコード後のCSS全体が大きくなりすぎる場合の対処
   - 推奨: 背景画像は500KB以下を推奨
   - 警告表示: 5MB超過時は警告
 
 ### 20.2 ローカルフォント機能の制限事項
+
 - **Local Font Access API対応ブラウザ**: Chrome 103+, Edge 103+のみ
 - **非対応ブラウザ**: フォント名の直接入力のみ可能
 - **ライセンス責任**: ユーザー自身がフォントライセンスを確認する必要がある
@@ -880,10 +941,12 @@ https://[ユーザー名].github.io/youtube-counter-css-generator/
 - **配布時の注意**: 生成したCSSを他者に配布する場合、受け取る側も同じフォントをインストールしている必要がある
 
 ### 20.3 推奨運用
+
 - **配信用途**: ローカルフォント使用OK（自分のPC環境でのみ表示）
 - **配布用途**: Google Fonts推奨（誰でも同じ表示が可能）
 
 ### 20.4 ユーザーサポート
+
 - GitHub Issues でのサポート
 - FAQページの用意
   - ローカルフォントのライセンス確認方法
@@ -891,13 +954,14 @@ https://[ユーザー名].github.io/youtube-counter-css-generator/
 - サンプル画像の提供
 
 ### 20.3 更新・メンテナンス
+
 - 依存ライブラリなし（保守負担軽減）
 - ブラウザAPI変更への対応
 - ユーザーフィードバックの反映
 
 ---
 
-**仕様書バージョン**: 1.1  
-**作成日**: 2026-01-18  
-**最終更新日**: 2026-01-18  
+**仕様書バージョン**: 1.1
+**作成日**: 2026-01-18
+**最終更新日**: 2026-01-18
 **更新内容**: ローカルフォント選択機能を追加

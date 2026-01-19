@@ -466,8 +466,8 @@ document.addEventListener('DOMContentLoaded', () => {
       fileName.textContent = '選択されていません';
 
       // テンプレート使用時はデフォルトサイズを設定
-      const defaultWidth = 1088;
-      const defaultHeight = 639;
+      const defaultWidth = 1000;
+      const defaultHeight = 600;
       bgWidth.value = defaultWidth;
       bgHeight.value = defaultHeight;
       updateSizeDisplay(defaultWidth, defaultHeight);
